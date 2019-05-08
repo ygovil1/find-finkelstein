@@ -53,14 +53,15 @@
 <body>
 	<script src="js/three.js"></script>
 	<script src="js/PointerLockControls.js"></script>
+	<script src="js/OBJLoader.js"></script>
 
 	<div id="blocker">
 
 		<div id="instructions">
-			<span style="font-size:40px">Looking for Finklestein?</span>
+			<span style="font-size:40px">Looking for Finkelstein?</span>
 			<br /><br>
 			Welcome to Firestone!<br><br>
-			Gather clues to find your missing Graphics professor.<br><br>
+			You need to submit your 426 Dean's Date assignment but you can't find your Graphics professor! Gather clues to find him. <br><br>
 			Move forward and backward with Up and Down keys. Rotate views with your mouse.<br><br>
 			Press Esc to pause game. Click anywhere to begin.
 		</div>
@@ -171,77 +172,113 @@
 
 			raycaster = new THREE.Raycaster(new THREE.Vector3(), new THREE.Vector3(0, - 1, 0), 0, 10);
 
-
-			var southWallGeometry = new THREE.PlaneBufferGeometry(500, 500, 20, 20);
+			// back wall
+			var southWallGeometry = new THREE.PlaneBufferGeometry(250, 400, 20, 20);
 			southWallGeometry.rotateZ(- Math.PI / 2);
-			southWallGeometry.translate(0, 100, -250);
-			southWallGeometry.addAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
-			var material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
-			var mesh = new THREE.Mesh(southWallGeometry, material);
-			scene.add(mesh);
+			southWallGeometry.translate(0, 125, -250);
 
+			// right wall
+			var rightWallGeometry = new THREE.PlaneBufferGeometry(250, 500, 20, 20);
+			rightWallGeometry.rotateZ(-Math.PI/2);
+			rightWallGeometry.rotateY(-Math.PI/2);
+			rightWallGeometry.translate(200, 125, 0);
+
+			// left wall
+			var leftWallGeometry = new THREE.PlaneBufferGeometry(250, 500, 20, 20);
+			leftWallGeometry.rotateZ(Math.PI/2);
+			leftWallGeometry.rotateY(Math.PI/2);
+			leftWallGeometry.translate(-200, 125, 0);
+
+			// front wall
+			var frontWallGeometry = new THREE.PlaneBufferGeometry(250, 400, 20, 20);
+			frontWallGeometry.rotateZ(-Math.PI/2);
+			frontWallGeometry.translate(0, 125, 250);
 
 			// floor rendering                TODO: fix to Firestone floor!
-			var floorGeometry = new THREE.PlaneBufferGeometry(500, 500, 100, 100);
+			var floorGeometry = new THREE.PlaneBufferGeometry(400, 500, 10, 10);
 			floorGeometry.rotateX(- Math.PI / 2);
-			// vertex displacement
 			var position = floorGeometry.attributes.position;
-			for (var i = 0, l = position.count; i < l; i++) {
-				// vertex.fromBufferAttribute(position, i);
-				// vertex.x += Math.random() * 20 - 10;
-				// vertex.y += Math.random() * 2;
-				// vertex.z += Math.random() * 20 - 10;
-				// position.setXYZ(i, vertex.x, vertex.y, vertex.z);
-			}
 			floorGeometry = floorGeometry.toNonIndexed(); // ensure each face has unique vertices
-			position = floorGeometry.attributes.position;
-			var colors = [];
-			for (var i = 0, l = position.count; i < l; i++) {
-				color.setHSL(Math.random() * 0.2 + 0.7, 0.75, Math.random() * 0.25 + 0.75);
-				colors.push(color.r, color.g, color.b);
-			}
-			floorGeometry.addAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
 
+			// ceiling rendering                TODO: fix to Firestone floor!
+			var ceilGeometry = new THREE.PlaneBufferGeometry(400, 500, 10, 10);
+			ceilGeometry.rotateX(- Math.PI / 2);
+			ceilGeometry.translate(0, 250, 0);
+			
 
-			// objects setup                TODO: add Firestone objects + add how to not go through objects?
-			var boxGeometry = new THREE.BoxBufferGeometry(20, 20, 20);
-			boxGeometry = boxGeometry.toNonIndexed(); // ensure each face has unique vertices
-			position = boxGeometry.attributes.position;
-			colors = [];
-			for (var i = 0, l = position.count; i < l; i++) {
-				color.setHSL(Math.random() * 0.3 + 0.5, 0.75, Math.random() * 0.25 + 0.75);
-				colors.push(color.r, color.g, color.b);
-			}
-			boxGeometry.addAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
-			for (var i = 0; i < 500; i++) {
-				var boxMaterial = new THREE.MeshPhongMaterial({ specular: 0xffffff, flatShading: true, vertexColors: THREE.VertexColors });
-				boxMaterial.color.setHSL(Math.random() * 0.2 + 0.5, 0.75, Math.random() * 0.25 + 0.75);
-				var box = new THREE.Mesh(boxGeometry, boxMaterial);
-				box.position.x = Math.floor(Math.random() * 20 - 10) * 20;
-				box.position.y = Math.floor(Math.random() * 20) * 20 + 10;
-				box.position.z = Math.floor(Math.random() * 20 - 10) * 20;
-				scene.add(box);
-				objects.push(box);
-			}
+			// add objects to scene
+			loadObject("obj/chair.obj");
+			// loadObject("obj/table.obj");
 
 			renderer = new THREE.WebGLRenderer({ antialias: true });
 			renderer.setPixelRatio(window.devicePixelRatio);
 			renderer.setSize(window.innerWidth, window.innerHeight);
 			document.body.appendChild(renderer.domElement);
 
-			var texture = new THREE.TextureLoader().load('textures/hardwood2_diffuse.jpg', render);
-			texture.anisotropy = renderer.capabilities.getMaxAnisotropy();
-			texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-			texture.offset.set(0, 0);
-			texture.repeat.set(40, 40);
-
-			var floorMaterial = new THREE.MeshLambertMaterial({ map: texture, transparent: true });
+			var floortexture = new THREE.TextureLoader().load('textures/carpet.jpg', render);
+			floortexture.anisotropy = renderer.capabilities.getMaxAnisotropy();
+			floortexture.wrapS = floortexture.wrapT = THREE.RepeatWrapping;
+			floortexture.offset.set(0, 0);
+			floortexture.repeat.set(40, 40);
+			
+			var floorMaterial = new THREE.MeshLambertMaterial({ map: floortexture, transparent: true });
 			var floor = new THREE.Mesh(floorGeometry, floorMaterial);
 			scene.add(floor);
+
+			// add walls
+			var wallMaterial = new THREE.MeshBasicMaterial({ color: 0xfffaef, side: THREE.DoubleSide});
+			var back_wall = new THREE.Mesh(southWallGeometry, wallMaterial);
+			scene.add(back_wall);
+
+			var right_wall = new THREE.Mesh(rightWallGeometry, wallMaterial);
+			scene.add(right_wall);
+
+			var left_wall = new THREE.Mesh(leftWallGeometry, wallMaterial);
+			scene.add(left_wall);
+
+			var front_wall = new THREE.Mesh(frontWallGeometry, wallMaterial);
+			scene.add(front_wall);
+
+			var ceilMaterial = new THREE.MeshBasicMaterial({ color: 0xa8a7a4, side: THREE.DoubleSide});
+			var ceil = new THREE.Mesh(ceilGeometry, ceilMaterial);
+			scene.add(ceil);
 
 			window.addEventListener('resize', onWindowResize, false);
 		}
 
+		// loads object from the given filepath and adds it to the scene
+		function loadObject(filepath) {
+			var loader = new THREE.OBJLoader();
+
+			// load a resource
+			loader.load(
+				// resource URL
+				filepath,
+				// called when resource is loaded
+				function ( object ) {
+					var m = new THREE.Matrix4();
+					m.set( 1/10, 0, 0, 1,
+					       0, 1/10, 0, 1,
+					       0, 0, 1/10, 1,
+					       0, 0, 0, 1 );
+					object.applyMatrix(m);
+					object.translateX(50);
+					object.translateZ(-50);
+					objects.push(object);
+
+					console.log(objects[0]);
+					scene.add( object );
+				},
+				// called when loading is in progresses
+				function ( xhr ) {
+					console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+				},
+				// called when loading has errors
+				function ( error ) {
+					console.log( 'An error happened' );
+				}
+			);
+		}
 
 		function onWindowResize() {
 			camera.aspect = window.innerWidth / window.innerHeight;
