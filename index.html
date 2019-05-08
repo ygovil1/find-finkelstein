@@ -210,18 +210,19 @@
 			ceilGeometry.translate(0, 150, 0);
 			
 			// add bookshelves
-			// var index = loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(-120, 100, 0), 8);
-			// var bookshelf = objects[index];
-			// console.log(bookshelf);
+			let book_scale = new THREE.Vector3(0.5, 1, 1);
+			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(-80, 0, 0), book_scale, -Math.PI);
+			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(-80, 0, 0), book_scale, 0);
 
 			// add hanging lamps to scene
-			loadObject("./obj/light/model.dae", new THREE.Vector3(-120, 100, 0), 7);
-			loadObject("./obj/light/model.dae", new THREE.Vector3(-120, 100, 80), 7);
-			loadObject("./obj/light/model.dae", new THREE.Vector3(-120, 100, -80), 7);
+			let lamp_scale = new THREE.Vector3(7, 7, 7);
+			loadObject("./obj/light/model.dae", new THREE.Vector3(-120, 100, 0), lamp_scale, 0);
+			loadObject("./obj/light/model.dae", new THREE.Vector3(-120, 100, 80), lamp_scale, 0);
+			loadObject("./obj/light/model.dae", new THREE.Vector3(-120, 100, -80), lamp_scale, 0);
 
-			loadObject("./obj/light/model.dae", new THREE.Vector3(120, 100, 0), 7);
-			loadObject("./obj/light/model.dae", new THREE.Vector3(120, 100, 80), 7);
-			loadObject("./obj/light/model.dae", new THREE.Vector3(120, 100, -80), 7);
+			loadObject("./obj/light/model.dae", new THREE.Vector3(120, 100, 0), lamp_scale, 0);
+			loadObject("./obj/light/model.dae", new THREE.Vector3(120, 100, 80), lamp_scale, 0);
+			loadObject("./obj/light/model.dae", new THREE.Vector3(120, 100, -80), lamp_scale, 0);
 			
 			// add lights inside lamps
 			addPointLight(new THREE.Vector3(-120, 80, 0), 0xf2d637, 90);
@@ -277,7 +278,7 @@
 		}
 
 		// loads object from the given filepath and adds it to the scene
-		function loadObject(filepath, pos, scale) {
+		function loadObject(filepath, pos, scale, rotation) {
 
 			var loader = new THREE.ColladaLoader();
 			var obj;
@@ -285,16 +286,19 @@
 			loader.load(filepath, function ( collada ) {
 
 				obj = collada.scene;
-				obj.scale.x =obj.scale.y =obj.scale.z = scale;
+				obj.scale.x = scale.x;
+				obj.scale.y = scale.y;
+				obj.scale.z = scale.z;
 				obj.position.x= pos.x;
 				obj.position.y= pos.y;
 				obj.position.z= pos.z;
+				obj.rotation.x += rotation;
+				obj.rotation.y += rotation;
+				obj.rotation.z += rotation;
 				obj.castShadow = true;
 				objects.push(obj);
 				scene.add(obj);
 			});
-
-			return objects.length - 1;
 		}
 
 		function onWindowResize() {
@@ -366,9 +370,9 @@
 
 
 
-				if (controls.getObject().position.y < 10) {
+				if (controls.getObject().position.y < 25) {
 					velocity.y = 0;
-					controls.getObject().position.y = 10;
+					controls.getObject().position.y = 25;
 					canJump = true;
 				}
 				prevTime = time;
