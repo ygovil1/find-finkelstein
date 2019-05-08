@@ -177,26 +177,26 @@
 			raycaster = new THREE.Raycaster(new THREE.Vector3(), new THREE.Vector3(0, - 1, 0), 0, 10);
 
 			// back wall
-			var southWallGeometry = new THREE.PlaneBufferGeometry(150, 400, 20, 20);
+			var southWallGeometry = new THREE.PlaneBufferGeometry(100, 400, 20, 20);
 			southWallGeometry.rotateZ(- Math.PI / 2);
-			southWallGeometry.translate(0, 75, -250);
+			southWallGeometry.translate(0, 50, -250);
 
 			// right wall
-			var rightWallGeometry = new THREE.PlaneBufferGeometry(150, 500, 20, 20);
+			var rightWallGeometry = new THREE.PlaneBufferGeometry(100, 500, 20, 20);
 			rightWallGeometry.rotateZ(-Math.PI/2);
 			rightWallGeometry.rotateY(-Math.PI/2);
-			rightWallGeometry.translate(200, 75, 0);
+			rightWallGeometry.translate(200, 50, 0);
 
 			// left wall
-			var leftWallGeometry = new THREE.PlaneBufferGeometry(150, 500, 20, 20);
+			var leftWallGeometry = new THREE.PlaneBufferGeometry(100, 500, 20, 20);
 			leftWallGeometry.rotateZ(Math.PI/2);
 			leftWallGeometry.rotateY(Math.PI/2);
-			leftWallGeometry.translate(-200, 75, 0);
+			leftWallGeometry.translate(-200, 50, 0);
 
 			// front wall
-			var frontWallGeometry = new THREE.PlaneBufferGeometry(150, 400, 20, 20);
+			var frontWallGeometry = new THREE.PlaneBufferGeometry(100, 400, 20, 20);
 			frontWallGeometry.rotateZ(-Math.PI/2);
-			frontWallGeometry.translate(0, 75, 250);
+			frontWallGeometry.translate(0, 50, 250);
 
 			// floor rendering                TODO: fix to Firestone floor!
 			var floorGeometry = new THREE.PlaneBufferGeometry(400, 500, 10, 10);
@@ -207,35 +207,97 @@
 			// ceiling rendering                TODO: fix to Firestone floor!
 			var ceilGeometry = new THREE.PlaneBufferGeometry(400, 500, 10, 10);
 			ceilGeometry.rotateX(- Math.PI / 2);
-			ceilGeometry.translate(0, 150, 0);
+			ceilGeometry.translate(0, 100, 0);
 			
 			// add bookshelves
-			let book_scale = new THREE.Vector3(0.5, 1, 1);
+			let book_scale = new THREE.Vector3(0.5, 1, 1.3);
 			let book_rotation = new THREE.Vector3(0, Math.PI, 0);
 			let zero_rot = new THREE.Vector3(0, 0, 0);
-			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(-70, 36, 0), book_scale, book_rotation);
-			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(-70, 0, 0), book_scale, zero_rot);
-			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(-70, 36, -35), book_scale, book_rotation);
-			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(-70, 0, -35), book_scale, zero_rot);
+			// left
+			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(-50, 46.8, 0), book_scale, book_rotation);
+			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(-50, 0, 0), book_scale, zero_rot);
+			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(-50, 46.8, -35), book_scale, book_rotation);
+			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(-50, 0, -35), book_scale, zero_rot);
+
+			// front
+			let book_front_rot1 = new THREE.Vector3(0, Math.PI, -Math.PI/2);
+			let book_front_rot2 = new THREE.Vector3(0, Math.PI, Math.PI/2);
+			let book_tall = new THREE.Vector3(0.5, 1.65, 1.7);
+			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(15, 61.2, 50), book_tall, book_front_rot1);
+			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(-43, 61.2, 50), book_tall, book_front_rot2);
+			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(74, 61.2, 50), book_tall, book_front_rot1);
+			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(16, 61.2, 50), book_tall, book_front_rot2);
+
+			// back
+			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(15, 61.2, -80), book_tall, book_front_rot1);
+			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(-43, 61.2,-80), book_tall, book_front_rot2);
+			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(74, 61.2, -80), book_tall, book_front_rot1);
+			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(16, 61.2, -80), book_tall, book_front_rot2);
+
+			// right
+			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(80, 46.8, 45), book_scale, book_rotation);
+			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(80, 0, 45), book_scale, zero_rot);
+			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(80, 46.8, 10), book_scale, book_rotation);
+			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(80, 0, 10), book_scale, zero_rot);
+
+			// add pillars by bookshelves
+			var geometry = new THREE.BoxGeometry(11, 11, 100);
+			var material = new THREE.MeshStandardMaterial({color: 0x3f8c9b});
+			geometry.rotateX(- Math.PI / 2);
+			geometry.translate(-50, 50, -80);
+			var pillar = new THREE.Mesh(geometry, material );
+			scene.add(pillar);
+
+			var geometry2 = new THREE.BoxGeometry(11, 11, 100);
+			geometry2.rotateX(- Math.PI / 2);
+			geometry2.translate(-50, 50, 50);
+			var pillar2 = new THREE.Mesh(geometry2, material );
+			scene.add(pillar2);
+
+			var geometry3 = new THREE.BoxGeometry(11, 11, 100);
+			geometry3.rotateX(- Math.PI / 2);
+			geometry3.translate(80, 50, 50);
+			var pillar3 = new THREE.Mesh(geometry3, material );
+			scene.add(pillar3);
+
+			var geometry4 = new THREE.BoxGeometry(11, 11, 100);
+			geometry4.rotateX(- Math.PI / 2);
+			geometry4.translate(80, 50, -80);
+			var pillar4 = new THREE.Mesh(geometry4, material );
+			scene.add(pillar4);
+
+			// add mystery door in the back
+			let door_scale = new THREE.Vector3(0.6, 0.6, 0.6);
+			let door_rot = new THREE.Vector3(0, 0, -3 * Math.PI/2);
+			loadObject("./obj/door/model.dae", new THREE.Vector3(-100, 0, -225), door_scale, door_rot);
+
+			// add prox sensor near the door
+			let sensor_scale = new THREE.Vector3(0.8, 0.8, 0.8);
+			let sensor_rot = new THREE.Vector3(0, 0, 0);
+			loadObject("./obj/prox_sensor/model.dae", new THREE.Vector3(-110, 20, -245), sensor_scale,sensor_rot);
+
+			// add red point light inside sensor (to indicate LOCKED state)
+			addPointLight(new THREE.Vector3(-110, 20, -240), 0xff0000, 11);
 
 			// add hanging lamps to scene
-			let lamp_scale = new THREE.Vector3(7, 7, 7);
-			loadObject("./obj/light/model.dae", new THREE.Vector3(-120, 100, 0), lamp_scale, zero_rot);
-			loadObject("./obj/light/model.dae", new THREE.Vector3(-120, 100, 80), lamp_scale, zero_rot);
-			loadObject("./obj/light/model.dae", new THREE.Vector3(-120, 100, -80), lamp_scale, zero_rot);
+			let lamp_scale = new THREE.Vector3(5, 5, 3);
+			loadObject("./obj/light/model.dae", new THREE.Vector3(-120, 60, 0), lamp_scale, zero_rot);
+			loadObject("./obj/light/model.dae", new THREE.Vector3(-120, 60, 80), lamp_scale, zero_rot);
+			loadObject("./obj/light/model.dae", new THREE.Vector3(-120, 60, -80), lamp_scale, zero_rot);
 
-			loadObject("./obj/light/model.dae", new THREE.Vector3(120, 100, 0), lamp_scale, zero_rot);
-			loadObject("./obj/light/model.dae", new THREE.Vector3(120, 100, 80), lamp_scale, zero_rot);
-			loadObject("./obj/light/model.dae", new THREE.Vector3(120, 100, -80), lamp_scale, zero_rot);
+			loadObject("./obj/light/model.dae", new THREE.Vector3(120, 60, 0), lamp_scale, zero_rot);
+			loadObject("./obj/light/model.dae", new THREE.Vector3(120, 60, 80), lamp_scale, zero_rot);
+			loadObject("./obj/light/model.dae", new THREE.Vector3(120, 60, -80), lamp_scale, zero_rot);
+
 			
 			// add lights inside lamps
-			addPointLight(new THREE.Vector3(-120, 80, 0), 0xf2d637, 90);
-			addPointLight(new THREE.Vector3(-120, 80, 80), 0xf2d637, 90);
-			addPointLight(new THREE.Vector3(-120, 80, -80), 0xf2d637, 90);
+			addPointLight(new THREE.Vector3(-120, 40, 0), 0xf2d637, 90);
+			addPointLight(new THREE.Vector3(-120, 40, 80), 0xf2d637, 90);
+			addPointLight(new THREE.Vector3(-120, 40, -80), 0xf2d637, 90);
 
-			addPointLight(new THREE.Vector3(120, 80, 0), 0xf2d637, 90);
-			addPointLight(new THREE.Vector3(120, 80, 80), 0xf2d637, 90);
-			addPointLight(new THREE.Vector3(120, 80, -80), 0xf2d637, 90);
+			addPointLight(new THREE.Vector3(120, 40, 0), 0xf2d637, 90);
+			addPointLight(new THREE.Vector3(120, 40, 80), 0xf2d637, 90);
+			addPointLight(new THREE.Vector3(120, 40, -80), 0xf2d637, 90);
 
 			renderer = new THREE.WebGLRenderer({ antialias: true });
 			renderer.setPixelRatio(window.devicePixelRatio);
@@ -290,15 +352,15 @@
 			loader.load(filepath, function ( collada ) {
 
 				obj = collada.scene;
-				obj.scale.x = scale.x;
-				obj.scale.y = scale.y;
-				obj.scale.z = scale.z;
 				obj.position.x= pos.x;
 				obj.position.y= pos.y;
 				obj.position.z= pos.z;
 				obj.rotation.x += rotation.x;
 				obj.rotation.y += rotation.y;
 				obj.rotation.z += rotation.z;
+				obj.scale.x = scale.x;
+				obj.scale.y = scale.y;
+				obj.scale.z = scale.z;
 				obj.castShadow = true;
 				objects.push(obj);
 				scene.add(obj);
