@@ -211,9 +211,9 @@
 			
 
 			// add hanging lamps to scene
-			loadObject("./obj/light/model.dae", new THREE.Vector3(-120, 100, 0));
-			loadObject("./obj/light/model.dae", new THREE.Vector3(-120, 100, 80));
-			loadObject("./obj/light/model.dae", new THREE.Vector3(-120, 100, -80));
+			loadObject("./obj/light/model.dae", new THREE.Vector3(-120, 100, 0), 7);
+			loadObject("./obj/light/model.dae", new THREE.Vector3(-120, 100, 80), 7);
+			loadObject("./obj/light/model.dae", new THREE.Vector3(-120, 100, -80), 7);
 			
 			// add lights inside lamps
 			addPointLight(new THREE.Vector3(-120, 80, 0), 0xf2d637, 90);
@@ -268,14 +268,14 @@
 		}
 
 		// loads object from the given filepath and adds it to the scene
-		function loadObject(filepath, pos) {
+		function loadObject(filepath, pos, scale) {
 
 			var loader = new THREE.ColladaLoader();
 			loader.convertUpAxis = true;
 			loader.load(filepath, function ( collada ) {
 
 				let obj = collada.scene;
-				obj.scale.x =obj.scale.y =obj.scale.z = 7;
+				obj.scale.x =obj.scale.y =obj.scale.z = scale;
 				obj.position.x= pos.x;
 				obj.position.y= pos.y;
 				obj.position.z= pos.z;
