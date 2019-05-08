@@ -96,7 +96,7 @@
 			camera.lookAt(new THREE.Vector3(-100, 50, -250));
 			scene = new THREE.Scene();
 			scene.background = new THREE.Color(0xffffff);
-			scene.fog = new THREE.Fog(0xffffff, 0, 750);
+			scene.fog = new THREE.Fog(0x000000, 0, 750);
 			var light = new THREE.HemisphereLight(0xe5ceae, 0x789ea0, 0.75);
 			light.position.set(0.5, 1, 0.75);
 			scene.add(light);
@@ -279,6 +279,41 @@
 			// add red point light inside sensor (to indicate LOCKED state)
 			addPointLight(new THREE.Vector3(-110, 20, -240), 0xff0000, 11);
 
+			// add wooden tables
+			let big_table_scale = new THREE.Vector3(0.7, 1.2, 0.7);
+			let reg_table_scale = new THREE.Vector3(0.7, 1.2, 0.7);
+			let table_hor = new THREE.Vector3(0, 0, -3* Math.PI / 2);
+			loadObject("./obj/wooden_table/model.dae", new THREE.Vector3(50,0, -10), big_table_scale, table_hor);
+
+				// the two tables as you walk down straight
+			loadObject("./obj/wooden_table/model.dae", new THREE.Vector3(-80,0, 100), big_table_scale, table_hor);
+			loadObject("./obj/wooden_table/model.dae", new THREE.Vector3(-80,0, -50), big_table_scale, table_hor);
+
+			// add table lamps to wooden table in the middle of the bookshelves
+			let tlamp_scale = new THREE.Vector3(1, 1, 0.7);
+			loadObject("./obj/table_lamp/model.dae", new THREE.Vector3(45, 17, -5), tlamp_scale, table_hor);
+			loadObject("./obj/table_lamp/model.dae", new THREE.Vector3(25, 17, -5), tlamp_scale, table_hor);
+			loadObject("./obj/table_lamp/model.dae", new THREE.Vector3(5, 17, -5), tlamp_scale, table_hor);
+			loadObject("./obj/table_lamp/model.dae", new THREE.Vector3(-90, 17, 110), tlamp_scale, table_hor);
+			loadObject("./obj/table_lamp/model.dae", new THREE.Vector3(-110, 17, 110), tlamp_scale, table_hor);
+			loadObject("./obj/table_lamp/model.dae", new THREE.Vector3(-90, 17, -40), tlamp_scale, table_hor);
+			loadObject("./obj/table_lamp/model.dae", new THREE.Vector3(-110, 17, -40), tlamp_scale, table_hor);
+
+			// add white high-back sofa
+			let sofa_scale = new THREE.Vector3(0.6, 0.6, 0.8);
+			let sofa_rot = new THREE.Vector3(0, 0, -Math.PI);
+			loadObject("./obj/white_sofa/model.dae", new THREE.Vector3(-90, 0, 0), sofa_scale, zero_rot);
+			loadObject("./obj/white_sofa/model.dae", new THREE.Vector3(-138, 0, 30), sofa_scale, sofa_rot);
+
+			// add point lights inside table lamps
+			addPointLight(new THREE.Vector3(5, 30, -45), 0xffe98c, 50);
+			addPointLight(new THREE.Vector3(25, 30, -45), 0xffe98c, 50);
+			addPointLight(new THREE.Vector3(45, 30, -45), 0xffe98c, 50); 
+			addPointLight(new THREE.Vector3(-90, 30, -40), 0xffe98c, 50); // front table lamps
+			addPointLight(new THREE.Vector3(-110, 30, -40), 0xffe98c, 50); // front table lamps
+			addPointLight(new THREE.Vector3(-90, 30, 110), 0xffe98c, 50); // back table lamps
+			addPointLight(new THREE.Vector3(-110, 30, 110), 0xffe98c, 50); // back table lamps
+
 			// add hanging lamps to scene
 			let lamp_scale = new THREE.Vector3(5, 5, 3);
 			loadObject("./obj/light/model.dae", new THREE.Vector3(-120, 60, 0), lamp_scale, zero_rot);
@@ -355,12 +390,13 @@
 				obj.position.x= pos.x;
 				obj.position.y= pos.y;
 				obj.position.z= pos.z;
-				obj.rotation.x += rotation.x;
-				obj.rotation.y += rotation.y;
-				obj.rotation.z += rotation.z;
 				obj.scale.x = scale.x;
 				obj.scale.y = scale.y;
 				obj.scale.z = scale.z;
+				obj.rotation.x += rotation.x;
+				obj.rotation.y += rotation.y;
+				obj.rotation.z += rotation.z;
+				
 				obj.castShadow = true;
 				objects.push(obj);
 				scene.add(obj);
