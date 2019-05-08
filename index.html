@@ -204,7 +204,7 @@
 			var ceilGeometry = new THREE.PlaneBufferGeometry(400, 500, 10, 10);
 			ceilGeometry.rotateX(- Math.PI / 2);
 			ceilGeometry.translate(0, 250, 0);
-			
+
 
 			// add objects to scene
 			loadObject("obj/chair.obj");
@@ -220,7 +220,7 @@
 			floortexture.wrapS = floortexture.wrapT = THREE.RepeatWrapping;
 			floortexture.offset.set(0, 0);
 			floortexture.repeat.set(40, 40);
-			
+
 			var floorMaterial = new THREE.MeshLambertMaterial({ map: floortexture, transparent: true });
 			var floor = new THREE.Mesh(floorGeometry, floorMaterial);
 			scene.add(floor);
@@ -287,7 +287,7 @@
 		}
 
 
-		function animate() {                                     // This part is for jumping, which requires animation --> good to know, unsure if necessary in our game, we can keep just in case? Or we can have one of the clues, such as the fuse box, that can only be seen if you jump up? 
+		function animate() {                                     // This part is for jumping, which requires animation --> good to know, unsure if necessary in our game, we can keep just in case? Or we can have one of the clues, such as the fuse box, that can only be seen if you jump up?
 			requestAnimationFrame(animate);
 
 			if (controls.isLocked === true) {
@@ -310,11 +310,45 @@
 					canJump = true;
 				}
 
-				// console.log(controls.getObject().position);
 
-				controls.getObject().translateX(velocity.x * delta);
-				controls.getObject().position.y += (velocity.y * delta); // new behavior
-				controls.getObject().translateZ(velocity.z * delta);
+				// Code to handle not going through objects
+				// ------------------ START ---------------------
+				var curr_pos = controls.getObject().position.clone();
+				var obj_too_close = [];		// list of objects that camera is too close to
+				var new_pos;
+				for (var i = 0; i < objects.length; i++) {
+				  var obj_pos = objects[i].position;
+				  if (obj_pos.distanceTo(curr_pos) < 10)  // too close
+				    obj_too_close.push(objects[i]);
+				}
+
+				if (obj_too_close.length == 0) {				// not too close to any obj
+				  controls.getObject().translateX(velocity.x * delta);
+				  controls.getObject().position.y += (velocity.y * delta); // new behavior
+				  controls.getObject().translateZ(velocity.z * delta);
+				}
+				else {
+				  for (var i = 0; i < obj_too_close.length; i++) {
+				    var obj_pos = obj_too_close[i].position;
+
+				    var dist = obj_pos.distanceTo(curr_pos);
+				    var new_pos = curr_pos.clone();
+				    var x_change = new THREE.Vector3(velocity.x * delta, 0, 0);
+				    var y_change = new THREE.Vector3(0, velocity.y * delta, 0);
+				    var z_change = new THREE.Vector3(0, 0, velocity.z * delta);
+
+				    if (new_pos.clone().add(x_change).distanceTo(obj_pos) > dist)
+				      controls.getObject().translateX(velocity.x * delta);
+				    if (new_pos.clone().add(y_change).distanceTo(obj_pos) > dist)
+				      controls.getObject().position.y += (velocity.y * delta);
+				    if (new_pos.clone().add(z_change).distanceTo(obj_pos) > dist)
+				      controls.getObject().translateZ(velocity.z * delta);
+				  }
+				}
+				// ------------------ END ---------------------
+
+
+
 				if (controls.getObject().position.y < 10) {
 					velocity.y = 0;
 					controls.getObject().position.y = 10;
