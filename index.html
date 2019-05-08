@@ -211,18 +211,22 @@
 			
 			// add bookshelves
 			let book_scale = new THREE.Vector3(0.5, 1, 1);
-			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(-80, 0, 0), book_scale, -Math.PI);
-			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(-80, 0, 0), book_scale, 0);
+			let book_rotation = new THREE.Vector3(0, Math.PI, 0);
+			let zero_rot = new THREE.Vector3(0, 0, 0);
+			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(-70, 36, 0), book_scale, book_rotation);
+			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(-70, 0, 0), book_scale, zero_rot);
+			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(-70, 36, -35), book_scale, book_rotation);
+			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(-70, 0, -35), book_scale, zero_rot);
 
 			// add hanging lamps to scene
 			let lamp_scale = new THREE.Vector3(7, 7, 7);
-			loadObject("./obj/light/model.dae", new THREE.Vector3(-120, 100, 0), lamp_scale, 0);
-			loadObject("./obj/light/model.dae", new THREE.Vector3(-120, 100, 80), lamp_scale, 0);
-			loadObject("./obj/light/model.dae", new THREE.Vector3(-120, 100, -80), lamp_scale, 0);
+			loadObject("./obj/light/model.dae", new THREE.Vector3(-120, 100, 0), lamp_scale, zero_rot);
+			loadObject("./obj/light/model.dae", new THREE.Vector3(-120, 100, 80), lamp_scale, zero_rot);
+			loadObject("./obj/light/model.dae", new THREE.Vector3(-120, 100, -80), lamp_scale, zero_rot);
 
-			loadObject("./obj/light/model.dae", new THREE.Vector3(120, 100, 0), lamp_scale, 0);
-			loadObject("./obj/light/model.dae", new THREE.Vector3(120, 100, 80), lamp_scale, 0);
-			loadObject("./obj/light/model.dae", new THREE.Vector3(120, 100, -80), lamp_scale, 0);
+			loadObject("./obj/light/model.dae", new THREE.Vector3(120, 100, 0), lamp_scale, zero_rot);
+			loadObject("./obj/light/model.dae", new THREE.Vector3(120, 100, 80), lamp_scale, zero_rot);
+			loadObject("./obj/light/model.dae", new THREE.Vector3(120, 100, -80), lamp_scale, zero_rot);
 			
 			// add lights inside lamps
 			addPointLight(new THREE.Vector3(-120, 80, 0), 0xf2d637, 90);
@@ -292,9 +296,9 @@
 				obj.position.x= pos.x;
 				obj.position.y= pos.y;
 				obj.position.z= pos.z;
-				obj.rotation.x += rotation;
-				obj.rotation.y += rotation;
-				obj.rotation.z += rotation;
+				obj.rotation.x += rotation.x;
+				obj.rotation.y += rotation.y;
+				obj.rotation.z += rotation.z;
 				obj.castShadow = true;
 				objects.push(obj);
 				scene.add(obj);
