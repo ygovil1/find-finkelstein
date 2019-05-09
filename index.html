@@ -214,6 +214,7 @@
 			let book_rotation = new THREE.Vector3(0, Math.PI, 0);
 			let book_rot = new THREE.Vector3(0, 0, -Math.PI);
 			let zero_rot = new THREE.Vector3(0, 0, 0);
+			
 			// left
 			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(-50, 0, -36), book_scale, book_rot);
 			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(-50, 0, 0), book_scale, zero_rot);
@@ -284,7 +285,7 @@
 			let big_table_scale = new THREE.Vector3(0.7, 1.2, 0.7);
 			let reg_table_scale = new THREE.Vector3(0.7, 1.2, 0.7);
 			let table_hor = new THREE.Vector3(0, 0, -3* Math.PI / 2);
-			loadObject("./obj/wooden_table/model.dae", new THREE.Vector3(50,0, -10), big_table_scale, table_hor);
+			// loadObject("./obj/wooden_table/model.dae", new THREE.Vector3(50,0, -10), big_table_scale, table_hor);
 
 				// the two tables as you walk down straight
 			loadObject("./obj/wooden_table/model.dae", new THREE.Vector3(-80,0, 100), big_table_scale, table_hor);
@@ -321,6 +322,7 @@
 			let sofa_rot = new THREE.Vector3(0, 0, -Math.PI);
 			loadObject("./obj/white_sofa/model.dae", new THREE.Vector3(-90, 0, 0), sofa_scale, zero_rot);
 			loadObject("./obj/white_sofa/model.dae", new THREE.Vector3(-138, 0, 30), sofa_scale, sofa_rot);
+			loadObject("./obj/wooden_table/model.dae", new THREE.Vector3(-90, 0, 25), new THREE.Vector3(0.5, 0.75, 0.5), table_hor);
 
 			// add point lights inside table lamps
 			addPointLight(new THREE.Vector3(5, 30, -45), 0xffe98c, 50);
