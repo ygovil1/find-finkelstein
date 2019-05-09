@@ -96,7 +96,7 @@
 			camera.lookAt(new THREE.Vector3(-100, 50, -250));
 			scene = new THREE.Scene();
 			scene.background = new THREE.Color(0xffffff);
-			scene.fog = new THREE.Fog(0x000000, 0, 750);
+			scene.fog = new THREE.Fog(0xffffff, 0, 750);
 			var light = new THREE.HemisphereLight(0xe5ceae, 0x789ea0, 0.75);
 			light.position.set(0.5, 1, 0.75);
 			scene.add(light);
@@ -212,32 +212,33 @@
 			// add bookshelves
 			let book_scale = new THREE.Vector3(0.5, 1, 1.3);
 			let book_rotation = new THREE.Vector3(0, Math.PI, 0);
+			let book_rot = new THREE.Vector3(0, 0, -Math.PI);
 			let zero_rot = new THREE.Vector3(0, 0, 0);
 			// left
-			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(-50, 46.8, 0), book_scale, book_rotation);
+			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(-50, 0, -36), book_scale, book_rot);
 			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(-50, 0, 0), book_scale, zero_rot);
-			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(-50, 46.8, -35), book_scale, book_rotation);
+			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(-50, 0, -71), book_scale, book_rot);
 			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(-50, 0, -35), book_scale, zero_rot);
 
 			// front
-			let book_front_rot1 = new THREE.Vector3(0, Math.PI, -Math.PI/2);
-			let book_front_rot2 = new THREE.Vector3(0, Math.PI, Math.PI/2);
+			let book_front_rot1 = new THREE.Vector3(0, 0, -Math.PI/2);
+			let book_front_rot2 = new THREE.Vector3(0, 0, -3* Math.PI/2);
 			let book_tall = new THREE.Vector3(0.5, 1.65, 1.7);
-			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(15, 61.2, 50), book_tall, book_front_rot1);
-			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(-43, 61.2, 50), book_tall, book_front_rot2);
-			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(74, 61.2, 50), book_tall, book_front_rot1);
-			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(16, 61.2, 50), book_tall, book_front_rot2);
+			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(-43, 0, 50), book_tall, book_front_rot1);
+			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(16, 0, 50), book_tall, book_front_rot2);
+			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(14, 0, 50), book_tall, book_front_rot1);
+			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(73, 0, 50), book_tall, book_front_rot2);
 
 			// back
-			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(15, 61.2, -80), book_tall, book_front_rot1);
-			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(-43, 61.2,-80), book_tall, book_front_rot2);
-			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(74, 61.2, -80), book_tall, book_front_rot1);
-			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(16, 61.2, -80), book_tall, book_front_rot2);
+			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(-43,0, -80), book_tall, book_front_rot1);
+			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(16, 0,-80), book_tall, book_front_rot2);
+			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(14, 0, -80), book_tall, book_front_rot1);
+			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(73, 0, -80), book_tall, book_front_rot2);
 
 			// right
-			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(80, 46.8, 45), book_scale, book_rotation);
+			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(80, 0, 9), book_scale, book_rot);
 			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(80, 0, 45), book_scale, zero_rot);
-			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(80, 46.8, 10), book_scale, book_rotation);
+			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(80, 0, -26), book_scale, book_rot);
 			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(80, 0, 10), book_scale, zero_rot);
 
 			// add pillars by bookshelves
