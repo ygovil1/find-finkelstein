@@ -208,19 +208,20 @@
 			var ceilGeometry = new THREE.PlaneBufferGeometry(400, 500, 10, 10);
 			ceilGeometry.rotateX(- Math.PI / 2);
 			ceilGeometry.translate(0, 100, 0);
-			
+
 			// add bookshelves
 			let book_scale = new THREE.Vector3(0.5, 1, 1.3);
 			let book_rotation = new THREE.Vector3(0, Math.PI, 0);
 			let book_rot = new THREE.Vector3(0, 0, -Math.PI);
 			let zero_rot = new THREE.Vector3(0, 0, 0);
+			
 			// left
 			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(-50, 0, -36), book_scale, book_rot);
 			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(-50, 0, 0), book_scale, zero_rot);
 			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(-50, 0, -71), book_scale, book_rot);
 			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(-50, 0, -35), book_scale, zero_rot);
-
-			// front
+			//
+			// // front
 			let book_front_rot1 = new THREE.Vector3(0, 0, -Math.PI/2);
 			let book_front_rot2 = new THREE.Vector3(0, 0, -3* Math.PI/2);
 			let book_tall = new THREE.Vector3(0.5, 1.65, 1.7);
@@ -228,14 +229,14 @@
 			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(16, 0, 50), book_tall, book_front_rot2);
 			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(14, 0, 50), book_tall, book_front_rot1);
 			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(73, 0, 50), book_tall, book_front_rot2);
-
-			// back
+			//
+			// // back
 			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(-43,0, -80), book_tall, book_front_rot1);
 			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(16, 0,-80), book_tall, book_front_rot2);
 			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(14, 0, -80), book_tall, book_front_rot1);
 			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(73, 0, -80), book_tall, book_front_rot2);
-
-			// right
+			//
+			// // right
 			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(80, 0, 9), book_scale, book_rot);
 			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(80, 0, 45), book_scale, zero_rot);
 			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(80, 0, -26), book_scale, book_rot);
@@ -284,7 +285,7 @@
 			let big_table_scale = new THREE.Vector3(0.7, 1.2, 0.7);
 			let reg_table_scale = new THREE.Vector3(0.7, 1.2, 0.7);
 			let table_hor = new THREE.Vector3(0, 0, -3* Math.PI / 2);
-			loadObject("./obj/wooden_table/model.dae", new THREE.Vector3(50,0, -10), big_table_scale, table_hor);
+			// loadObject("./obj/wooden_table/model.dae", new THREE.Vector3(50,0, -10), big_table_scale, table_hor);
 
 				// the two tables as you walk down straight
 			loadObject("./obj/wooden_table/model.dae", new THREE.Vector3(-80,0, 100), big_table_scale, table_hor);
@@ -300,16 +301,33 @@
 			loadObject("./obj/table_lamp/model.dae", new THREE.Vector3(-90, 17, -40), tlamp_scale, table_hor);
 			loadObject("./obj/table_lamp/model.dae", new THREE.Vector3(-110, 17, -40), tlamp_scale, table_hor);
 
+			// add green chairs by wooden tables
+			let green_chair_scale = new THREE.Vector3(0.75, 0.75, 0.75);
+			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(-108, 0, 70), green_chair_scale, new THREE.Vector3());		// for table (-80,0, 100)
+			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(-145, 0, 70), green_chair_scale, new THREE.Vector3());
+			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(-88, 0, 100), green_chair_scale, new THREE.Vector3(0,0, Math.PI));
+			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(-125, 0, 100), green_chair_scale, new THREE.Vector3(0,0, Math.PI));
+			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(-108, 0, -75), green_chair_scale, new THREE.Vector3());			// for table (-80,0, -50)
+			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(-145, 0, -75), green_chair_scale, new THREE.Vector3());
+			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(-88, 0, -45), green_chair_scale, new THREE.Vector3(0,0, Math.PI));
+			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(-125, 0, -45), green_chair_scale, new THREE.Vector3(0,0, Math.PI));
+			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(22, 0, -40), big_table_scale, new THREE.Vector3());							// for table (50,0, -10)
+			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(-15, 0, -40), big_table_scale, new THREE.Vector3());
+			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(42, 0, -10), big_table_scale, new THREE.Vector3(0,0, Math.PI));
+			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(5, 0, -10), big_table_scale, new THREE.Vector3(0,0, Math.PI));
+
+
 			// add white high-back sofa
 			let sofa_scale = new THREE.Vector3(0.6, 0.6, 0.8);
 			let sofa_rot = new THREE.Vector3(0, 0, -Math.PI);
 			loadObject("./obj/white_sofa/model.dae", new THREE.Vector3(-90, 0, 0), sofa_scale, zero_rot);
 			loadObject("./obj/white_sofa/model.dae", new THREE.Vector3(-138, 0, 30), sofa_scale, sofa_rot);
+			loadObject("./obj/wooden_table/model.dae", new THREE.Vector3(-90, 0, 25), new THREE.Vector3(0.5, 0.75, 0.5), table_hor);
 
 			// add point lights inside table lamps
 			addPointLight(new THREE.Vector3(5, 30, -45), 0xffe98c, 50);
 			addPointLight(new THREE.Vector3(25, 30, -45), 0xffe98c, 50);
-			addPointLight(new THREE.Vector3(45, 30, -45), 0xffe98c, 50); 
+			addPointLight(new THREE.Vector3(45, 30, -45), 0xffe98c, 50);
 			addPointLight(new THREE.Vector3(-90, 30, -40), 0xffe98c, 50); // front table lamps
 			addPointLight(new THREE.Vector3(-110, 30, -40), 0xffe98c, 50); // front table lamps
 			addPointLight(new THREE.Vector3(-90, 30, 110), 0xffe98c, 50); // back table lamps
@@ -325,7 +343,7 @@
 			loadObject("./obj/light/model.dae", new THREE.Vector3(120, 60, 80), lamp_scale, zero_rot);
 			loadObject("./obj/light/model.dae", new THREE.Vector3(120, 60, -80), lamp_scale, zero_rot);
 
-			
+
 			// add lights inside lamps
 			addPointLight(new THREE.Vector3(-120, 40, 0), 0xf2d637, 90);
 			addPointLight(new THREE.Vector3(-120, 40, 80), 0xf2d637, 90);
@@ -345,7 +363,7 @@
 			floortexture.wrapS = floortexture.wrapT = THREE.RepeatWrapping;
 			floortexture.offset.set(0, 0);
 			floortexture.repeat.set(40, 40);
-			
+
 			var floorMaterial = new THREE.MeshStandardMaterial({ map: floortexture});
 
 			var floor = new THREE.Mesh(floorGeometry, floorMaterial);
@@ -397,7 +415,7 @@
 				obj.rotation.x += rotation.x;
 				obj.rotation.y += rotation.y;
 				obj.rotation.z += rotation.z;
-				
+
 				obj.castShadow = true;
 				objects.push(obj);
 				scene.add(obj);
