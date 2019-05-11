@@ -22,7 +22,7 @@
 		#blocker {
 			position: absolute;
 			width: 100%;
-			height: 100%;
+			height: 90%;
 			background-color: rgba(0, 0, 0, 0.5);
 		}
 
@@ -45,6 +45,17 @@
 			color: #ffffff;
 			text-align: center;
 			cursor: pointer;
+		}
+
+		#inventory {
+			position:absolute;
+			bottom:0;
+			width: 100%;
+			height: 10%;
+			background-color: rgba(0, 0, 0, 0.7);
+			display: table-cell;
+  		vertical-align: middle;
+			horizontal-align: middle;
 		}
 	</style>
 </head>
@@ -69,6 +80,10 @@
 
 	</div>
 
+	<div id="inventory"></div>
+	
+	<script src="js/Inventory.js"></script>
+
 	<script>
 		var camera, scene, renderer, controls;
 		var objects = [];
@@ -86,6 +101,8 @@
 		var direction = new THREE.Vector3();
 		var vertex = new THREE.Vector3();
 		var color = new THREE.Color();
+
+		var playerInventory = Inventory();
 
 		init();
 		animate();
@@ -440,6 +457,9 @@
 			scene.add(ceil);
 
 			window.addEventListener('resize', onWindowResize, false);
+
+			// add sample items
+			playerInventory.addItem('key', 1)
 		}
 
 		// adds point light to the specified position
@@ -556,6 +576,7 @@
 		function render() {
 			requestAnimationFrame(render);
 			renderer.render(scene, camera);
+			playerInventory.refreshRender()
 		}
 
 
