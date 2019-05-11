@@ -33,8 +33,7 @@ Inventory = function(){
 		return false;
     }
     self.createButtonHTML = function(onclick, name, amount) {
-        let str = "<button onclick=\"" + onclick + "\">" + name + " x" + amount + "</button><br>";
-        str = "<div class=\"buttom\">" + str + "</div>";
+        let str = "<button id=\"invSlot\" onclick=\"" + onclick + "\">" + name + " x" + amount + "</button><br>";
         return str;
     }
 	self.refreshRender = function(){

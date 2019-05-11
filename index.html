@@ -57,6 +57,10 @@
   		vertical-align: middle;
 			horizontal-align: middle;
 		}
+
+		#invSlot {
+			height: 100%;
+		}
 	</style>
 </head>
 
@@ -460,7 +464,8 @@
 			window.addEventListener('resize', onWindowResize, false);
 
 			// add sample items
-			playerInventory.addItem('key', 1)
+			playerInventory.addItem('key', 1);
+			playerInventory.refreshRender();
 		}
 
 		// adds point light to the specified position
@@ -577,7 +582,6 @@
 		function render() {
 			requestAnimationFrame(render);
 			renderer.render(scene, camera);
-			playerInventory.refreshRender()
 		}
 
 
