@@ -32,9 +32,10 @@ Inventory = function(){
 		}  
 		return false;
     }
-    self.createButtonHTML = function(onclick, name, amount, imgName) {
-        let img = "<img id=\"itemImg\" src=\"" + imgName + "\">";
-        let str = "<button class=\"button\" id=\"invSlot\" onclick=\"" + onclick + "\">" + img + " x" + amount  + "</button><br>";
+    self.createButtonHTML = function(onclick, id, amount, imgName) {
+        let img = "<img id=\"" + id + "\" src=\"" + imgName + "\">";
+        let str = "<button class=\"button\" onclick=\"" + onclick + "\">" + img + " x" + amount  + "</button> ";
+        // str = "<div id=\"invSlot\" >" + str + "</div>"
         return str;
     }
 	self.refreshRender = function(){
@@ -42,7 +43,7 @@ Inventory = function(){
 		for(var i = 0 ; i < self.items.length; i++){
 			let item = Item.List[self.items[i].id];
 			let onclick = "Item.List['" + item.id + "'].event()";
-			str += self.createButtonHTML(onclick, item.name, self.items[i].amount, item.img);
+			str += self.createButtonHTML(onclick, item.id, self.items[i].amount, item.img);
 		}
 
 		document.getElementById("inventory").innerHTML = str;
@@ -67,4 +68,8 @@ Item.List = {};
 
 Item('key', "Key", "img/key1.png", function(){
     playerInventory.addItem('key', 1);
+});
+
+Item('fuse', "Fuse", "img/light-bulb.png", function(){
+    playerInventory.addItem('fuse', 1);
 });
