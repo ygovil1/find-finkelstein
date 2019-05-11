@@ -106,7 +106,7 @@
 	</div>
 
 	<div id="inventory"></div>
-	
+
 	<script src="js/Inventory.js"></script>
 
 	<script>
@@ -135,7 +135,7 @@
 		function init() {
 			camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1000);
 			camera.position.set(-100, 50, 200); // Set position like this
-			// camera.position.set(-100, 50, -200);			// this position is for editing items on the other side of the room 
+			// camera.position.set(-100, 50, -200);			// this position is for editing items on the other side of the room
 			camera.lookAt(new THREE.Vector3(-100, 50, -250));
 			scene = new THREE.Scene();
 			scene.background = new THREE.Color(0xffffff);
@@ -552,41 +552,44 @@
 					canJump = true;
 				}
 
+				controls.getObject().translateX( velocity.x * delta );
+				controls.getObject().position.y += ( velocity.y * delta ); // new behavior
+				controls.getObject().translateZ( velocity.z * delta );
 
 				// Code to handle not going through objects
 				// ------------------ START ---------------------
-				var curr_pos = controls.getObject().position.clone();
-				var obj_too_close = [];		// list of objects that camera is too close to
-				var new_pos;
-				for (var i = 0; i < objects.length; i++) {
-				  var obj_pos = objects[i].position;
-				  if (obj_pos.distanceTo(curr_pos) < 2)  // too close
-				    obj_too_close.push(objects[i]);
-				}
-
-				if (obj_too_close.length == 0) {				// not too close to any obj
-				  controls.getObject().translateX(velocity.x * delta);
-				  controls.getObject().position.y += (velocity.y * delta); // new behavior
-				  controls.getObject().translateZ(velocity.z * delta);
-				}
-				else {
-				  for (var i = 0; i < obj_too_close.length; i++) {
-				    var obj_pos = obj_too_close[i].position;
-
-				    var dist = obj_pos.distanceTo(curr_pos);
-				    var new_pos = curr_pos.clone();
-				    var x_change = new THREE.Vector3(velocity.x * delta, 0, 0);
-				    var y_change = new THREE.Vector3(0, velocity.y * delta, 0);
-				    var z_change = new THREE.Vector3(0, 0, velocity.z * delta);
-
-				    if (new_pos.clone().add(x_change).distanceTo(obj_pos) > dist)
-				      controls.getObject().translateX(velocity.x * delta);
-				    if (new_pos.clone().add(y_change).distanceTo(obj_pos) > dist)
-				      controls.getObject().position.y += (velocity.y * delta);
-				    if (new_pos.clone().add(z_change).distanceTo(obj_pos) > dist)
-				      controls.getObject().translateZ(velocity.z * delta);
-				  }
-				}
+				// var curr_pos = controls.getObject().position.clone();
+				// var obj_too_close = [];		// list of objects that camera is too close to
+				// var new_pos;
+				// for (var i = 0; i < objects.length; i++) {
+				//   var obj_pos = objects[i].position;
+				//   if (obj_pos.distanceTo(curr_pos) < 2)  // too close
+				//     obj_too_close.push(objects[i]);
+				// }
+				//
+				// if (obj_too_close.length == 0) {				// not too close to any obj
+				//   controls.getObject().translateX(velocity.x * delta);
+				//   controls.getObject().position.y += (velocity.y * delta); // new behavior
+				//   controls.getObject().translateZ(velocity.z * delta);
+				// }
+				// else {
+				//   for (var i = 0; i < obj_too_close.length; i++) {
+				//     var obj_pos = obj_too_close[i].position;
+				//
+				//     var dist = obj_pos.distanceTo(curr_pos);
+				//     var new_pos = curr_pos.clone();
+				//     var x_change = new THREE.Vector3(velocity.x * delta, 0, 0);
+				//     var y_change = new THREE.Vector3(0, velocity.y * delta, 0);
+				//     var z_change = new THREE.Vector3(0, 0, velocity.z * delta);
+				//
+				//     if (new_pos.clone().add(x_change).distanceTo(obj_pos) > dist)
+				//       controls.getObject().translateX(velocity.x * delta);
+				//     if (new_pos.clone().add(y_change).distanceTo(obj_pos) > dist)
+				//       controls.getObject().position.y += (velocity.y * delta);
+				//     if (new_pos.clone().add(z_change).distanceTo(obj_pos) > dist)
+				//       controls.getObject().translateZ(velocity.z * delta);
+				//   }
+				// }
 				// ------------------ END ---------------------
 
 
