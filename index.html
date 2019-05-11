@@ -58,8 +58,22 @@
 			horizontal-align: middle;
 		}
 
-		#invSlot {
+		.button {
 			height: 100%;
+			background-color: #555555;
+			border-radius: 8px;
+			border: none;
+  		color: white;
+  		padding: 10px 12px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			font-size: 16px;
+		}
+
+		#itemImg {
+			max-width: 80%;
+    	max-height: 50%;
 		}
 	</style>
 </head>
@@ -538,7 +552,7 @@
 				var new_pos;
 				for (var i = 0; i < objects.length; i++) {
 				  var obj_pos = objects[i].position;
-				  if (obj_pos.distanceTo(curr_pos) < 10)  // too close
+				  if (obj_pos.distanceTo(curr_pos) < 2)  // too close
 				    obj_too_close.push(objects[i]);
 				}
 
