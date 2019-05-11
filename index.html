@@ -53,9 +53,34 @@
 			width: 100%;
 			height: 10%;
 			background-color: rgba(0, 0, 0, 0.7);
-			display: table-cell;
-  		vertical-align: middle;
-			horizontal-align: middle;
+			display: inline;
+		}
+
+		.button {
+			height: 100%;
+			background-color: #555555;
+			border-radius: 8px;
+			border: none;
+  		color: white;
+  		padding: 10px 12px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			font-size: 16px;
+		}
+
+		#invSlot {
+			display: inline;
+		}
+
+		#key {
+			max-width: 50%;
+    	max-height: 80%;
+		}
+
+		#fuse {
+			max-width: 50%;
+    	max-height: 80%;
 		}
 	</style>
 </head>
@@ -459,7 +484,9 @@
 			window.addEventListener('resize', onWindowResize, false);
 
 			// add sample items
-			playerInventory.addItem('key', 1)
+			playerInventory.addItem('key', 1);
+			playerInventory.addItem('fuse', 1);
+			playerInventory.refreshRender();
 		}
 
 		// adds point light to the specified position
@@ -532,7 +559,7 @@
 				var new_pos;
 				for (var i = 0; i < objects.length; i++) {
 				  var obj_pos = objects[i].position;
-				  if (obj_pos.distanceTo(curr_pos) < 10)  // too close
+				  if (obj_pos.distanceTo(curr_pos) < 2)  // too close
 				    obj_too_close.push(objects[i]);
 				}
 
@@ -576,7 +603,6 @@
 		function render() {
 			requestAnimationFrame(render);
 			renderer.render(scene, camera);
-			playerInventory.refreshRender()
 		}
 
 

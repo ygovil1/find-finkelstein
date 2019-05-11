@@ -32,9 +32,10 @@ Inventory = function(){
 		}  
 		return false;
     }
-    self.createButtonHTML = function(onclick, name, amount) {
-        let str = "<button onclick=\"" + onclick + "\">" + name + " x" + amount + "</button><br>";
-        str = "<div class=\"buttom\">" + str + "</div>";
+    self.createButtonHTML = function(onclick, id, amount, imgName) {
+        let img = "<img id=\"" + id + "\" src=\"" + imgName + "\">";
+        let str = "<button class=\"button\" onclick=\"" + onclick + "\">" + img + " x" + amount  + "</button> ";
+        // str = "<div id=\"invSlot\" >" + str + "</div>"
         return str;
     }
 	self.refreshRender = function(){
@@ -42,7 +43,7 @@ Inventory = function(){
 		for(var i = 0 ; i < self.items.length; i++){
 			let item = Item.List[self.items[i].id];
 			let onclick = "Item.List['" + item.id + "'].event()";
-			str += self.createButtonHTML(onclick, item.name, self.items[i].amount);
+			str += self.createButtonHTML(onclick, item.id, self.items[i].amount, item.img);
 		}
 
 		document.getElementById("inventory").innerHTML = str;
@@ -53,21 +54,22 @@ Inventory = function(){
 }
 
 
-Item = function(id,name,event){
+Item = function(id, name, img, event){
 	var self = {
 		id:id,
 		name:name,
-		event:event,
+        event:event,
+        img:img
 	}
 	Item.List[self.id] = self;
 	return self;
 }
 Item.List = {};
 
-Item("potion","Potion",function(){
-	playerInventory.removeItem("potion",1);
+Item('key', "Key", "img/key1.png", function(){
+    playerInventory.addItem('key', 1);
 });
 
-Item('key', "Key", function(){
-    playerInventory.addItem('key', 1);
+Item('fuse', "Fuse", "img/light-bulb.png", function(){
+    playerInventory.addItem('fuse', 1);
 });
