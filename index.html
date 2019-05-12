@@ -48,39 +48,30 @@
 		}
 
 		#inventory {
-			position:absolute;
-			bottom:0;
+			position: absolute;
+			bottom: 0;
 			width: 100%;
 			height: 10%;
 			background-color: rgba(0, 0, 0, 0.7);
-			display: inline;
 		}
 
-		.button {
+		.invSlot {
 			height: 100%;
+			width: 16%;
 			background-color: #555555;
 			border-radius: 8px;
 			border: none;
-  		color: white;
-  		padding: 10px 12px;
+			color: white;
+			padding: 10px 12px;
 			text-align: center;
 			text-decoration: none;
 			display: inline-block;
 			font-size: 16px;
 		}
 
-		#invSlot {
-			display: inline;
-		}
-
-		#key {
-			max-width: 50%;
-    	max-height: 80%;
-		}
-
-		#fuse {
-			max-width: 50%;
-    	max-height: 80%;
+		#itemImg {
+			max-width: 80%;
+			max-height: 80%;
 		}
 	</style>
 </head>
@@ -98,7 +89,8 @@
 			<span style="font-size:40px">Looking for Finkelstein?</span>
 			<br /><br>
 			Welcome to Firestone!<br><br>
-			You need to submit your 426 Dean's Date assignment but you can't find your Graphics professor! Gather clues to find him. <br><br>
+			You need to submit your 426 Dean's Date assignment but you can't find your Graphics professor! Gather clues to
+			find him. <br><br>
 			Move forward and backward with Up and Down keys. Rotate views with your mouse.<br><br>
 			Press Esc to pause game. Click anywhere to begin.
 		</div>
@@ -189,6 +181,18 @@
 						if (canJump === true) velocity.y += 350;
 						canJump = false;
 						break;
+					case 75: // k
+						playerInventory.toggleItem('key');
+						break;
+					case 70: // f
+						playerInventory.toggleItem('fuse');
+						break;
+					case 80: // p
+						playerInventory.toggleItem('prox');
+						break;
+					case 66: // b
+						playerInventory.toggleItem('book');
+						break;
 				}
 			};
 			var onKeyUp = function (event) {
@@ -215,8 +219,6 @@
 			document.addEventListener('keydown', onKeyDown, false);
 			document.addEventListener('keyup', onKeyUp, false);
 
-
-
 			raycaster = new THREE.Raycaster(new THREE.Vector3(), new THREE.Vector3(0, - 1, 0), 0, 10);
 
 			// back wall
@@ -226,19 +228,19 @@
 
 			// right wall
 			var rightWallGeometry = new THREE.PlaneBufferGeometry(100, 500, 20, 20);
-			rightWallGeometry.rotateZ(-Math.PI/2);
-			rightWallGeometry.rotateY(-Math.PI/2);
+			rightWallGeometry.rotateZ(-Math.PI / 2);
+			rightWallGeometry.rotateY(-Math.PI / 2);
 			rightWallGeometry.translate(200, 50, 0);
 
 			// left wall
 			var leftWallGeometry = new THREE.PlaneBufferGeometry(100, 500, 20, 20);
-			leftWallGeometry.rotateZ(Math.PI/2);
-			leftWallGeometry.rotateY(Math.PI/2);
+			leftWallGeometry.rotateZ(Math.PI / 2);
+			leftWallGeometry.rotateY(Math.PI / 2);
 			leftWallGeometry.translate(-200, 50, 0);
 
 			// front wall
 			var frontWallGeometry = new THREE.PlaneBufferGeometry(100, 400, 20, 20);
-			frontWallGeometry.rotateZ(-Math.PI/2);
+			frontWallGeometry.rotateZ(-Math.PI / 2);
 			frontWallGeometry.translate(0, 50, 250);
 
 			// floor rendering                TODO: fix to Firestone floor!
@@ -265,8 +267,8 @@
 			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(-50, 0, -35), book_scale, zero_rot);
 
 			// front
-			let book_front_rot1 = new THREE.Vector3(0, 0, -Math.PI/2);
-			let book_front_rot2 = new THREE.Vector3(0, 0, -3* Math.PI/2);
+			let book_front_rot1 = new THREE.Vector3(0, 0, -Math.PI / 2);
+			let book_front_rot2 = new THREE.Vector3(0, 0, -3 * Math.PI / 2);
 			let book_tall = new THREE.Vector3(0.5, 1.65, 1.7);
 			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(-43, 0, 50), book_tall, book_front_rot1);
 			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(16, 0, 50), book_tall, book_front_rot2);
@@ -274,8 +276,8 @@
 			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(73, 0, 50), book_tall, book_front_rot2);
 
 			// back
-			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(-43,0, -80), book_tall, book_front_rot1);
-			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(16, 0,-80), book_tall, book_front_rot2);
+			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(-43, 0, -80), book_tall, book_front_rot1);
+			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(16, 0, -80), book_tall, book_front_rot2);
 			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(14, 0, -80), book_tall, book_front_rot1);
 			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(73, 0, -80), book_tall, book_front_rot2);
 
@@ -287,39 +289,39 @@
 
 			// add pillars by bookshelves
 			var geometry = new THREE.BoxGeometry(11, 11, 100);
-			var material = new THREE.MeshStandardMaterial({color: 0x3f8c9b});
+			var material = new THREE.MeshStandardMaterial({ color: 0x3f8c9b });
 			geometry.rotateX(- Math.PI / 2);
 			geometry.translate(-50, 50, -80);
-			var pillar = new THREE.Mesh(geometry, material );
+			var pillar = new THREE.Mesh(geometry, material);
 			scene.add(pillar);
 
 			var geometry2 = new THREE.BoxGeometry(11, 11, 100);
 			geometry2.rotateX(- Math.PI / 2);
 			geometry2.translate(-50, 50, 50);
-			var pillar2 = new THREE.Mesh(geometry2, material );
+			var pillar2 = new THREE.Mesh(geometry2, material);
 			scene.add(pillar2);
 
 			var geometry3 = new THREE.BoxGeometry(11, 11, 100);
 			geometry3.rotateX(- Math.PI / 2);
 			geometry3.translate(80, 50, 50);
-			var pillar3 = new THREE.Mesh(geometry3, material );
+			var pillar3 = new THREE.Mesh(geometry3, material);
 			scene.add(pillar3);
 
 			var geometry4 = new THREE.BoxGeometry(11, 11, 100);
 			geometry4.rotateX(- Math.PI / 2);
 			geometry4.translate(80, 50, -80);
-			var pillar4 = new THREE.Mesh(geometry4, material );
+			var pillar4 = new THREE.Mesh(geometry4, material);
 			scene.add(pillar4);
 
 			// add mystery door in the back
 			let door_scale = new THREE.Vector3(0.6, 0.6, 0.6);
-			let door_rot = new THREE.Vector3(0, 0, -3 * Math.PI/2);
+			let door_rot = new THREE.Vector3(0, 0, -3 * Math.PI / 2);
 			loadObject("./obj/door/model.dae", new THREE.Vector3(-100, 0, -225), door_scale, door_rot);
 
 			// add prox sensor near the door
 			let sensor_scale = new THREE.Vector3(0.8, 0.8, 0.8);
 			let sensor_rot = new THREE.Vector3(0, 0, 0);
-			loadObject("./obj/prox_sensor/model.dae", new THREE.Vector3(-110, 20, -245), sensor_scale,sensor_rot);
+			loadObject("./obj/prox_sensor/model.dae", new THREE.Vector3(-110, 20, -245), sensor_scale, sensor_rot);
 
 			// add red point light inside sensor (to indicate LOCKED state)
 			addPointLight(new THREE.Vector3(-110, 20, -240), 0xff0000, 11);
@@ -327,20 +329,20 @@
 			// add wooden tables
 			let big_table_scale = new THREE.Vector3(0.7, 1.2, 0.7);
 			let reg_table_scale = new THREE.Vector3(0.7, 1.2, 0.7);
-			let table_hor = new THREE.Vector3(0, 0, -3* Math.PI / 2);
-			loadObject("./obj/wooden_table/model.dae", new THREE.Vector3(50,0, -10), big_table_scale, table_hor);
+			let table_hor = new THREE.Vector3(0, 0, -3 * Math.PI / 2);
+			loadObject("./obj/wooden_table/model.dae", new THREE.Vector3(50, 0, -10), big_table_scale, table_hor);
 
-				// the two tables as you walk down straight
-			loadObject("./obj/wooden_table/model.dae", new THREE.Vector3(-80,0, 100), big_table_scale, table_hor);
-			loadObject("./obj/wooden_table/model.dae", new THREE.Vector3(-80,0, -50), big_table_scale, table_hor);
+			// the two tables as you walk down straight
+			loadObject("./obj/wooden_table/model.dae", new THREE.Vector3(-80, 0, 100), big_table_scale, table_hor);
+			loadObject("./obj/wooden_table/model.dae", new THREE.Vector3(-80, 0, -50), big_table_scale, table_hor);
 
 			// wooden tables and green chairs between red sofas and front bookshelves
 			loadObject("./obj/wooden_table/model.dae", new THREE.Vector3(55, 0, 150), big_table_scale, table_hor);
 			let green_chair_scale = new THREE.Vector3(0.75, 0.75, 0.75);
 			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(27, 0, 120), green_chair_scale, new THREE.Vector3());		// for table (55, 0, 150)
 			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(-10, 0, 120), green_chair_scale, new THREE.Vector3());
-			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(47, 0, 150), green_chair_scale, new THREE.Vector3(0,0, Math.PI));
-			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(10, 0, 150), green_chair_scale, new THREE.Vector3(0,0, Math.PI));
+			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(47, 0, 150), green_chair_scale, new THREE.Vector3(0, 0, Math.PI));
+			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(10, 0, 150), green_chair_scale, new THREE.Vector3(0, 0, Math.PI));
 
 			// add table lamps to wooden table in the middle of the bookshelves
 			let tlamp_scale = new THREE.Vector3(1, 1, 0.7);
@@ -357,16 +359,16 @@
 			// add green chairs by wooden tables
 			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(-108, 0, 70), green_chair_scale, new THREE.Vector3());		// for table (-80,0, 100)
 			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(-145, 0, 70), green_chair_scale, new THREE.Vector3());
-			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(-88, 0, 100), green_chair_scale, new THREE.Vector3(0,0, Math.PI));
-			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(-125, 0, 100), green_chair_scale, new THREE.Vector3(0,0, Math.PI));
+			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(-88, 0, 100), green_chair_scale, new THREE.Vector3(0, 0, Math.PI));
+			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(-125, 0, 100), green_chair_scale, new THREE.Vector3(0, 0, Math.PI));
 			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(-108, 0, -75), green_chair_scale, new THREE.Vector3());			// for table (-80,0, -50)
 			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(-145, 0, -75), green_chair_scale, new THREE.Vector3());
-			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(-88, 0, -45), green_chair_scale, new THREE.Vector3(0,0, Math.PI));
-			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(-125, 0, -45), green_chair_scale, new THREE.Vector3(0,0, Math.PI));
+			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(-88, 0, -45), green_chair_scale, new THREE.Vector3(0, 0, Math.PI));
+			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(-125, 0, -45), green_chair_scale, new THREE.Vector3(0, 0, Math.PI));
 			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(22, 0, -40), big_table_scale, new THREE.Vector3());							// for table (50,0, -10)
 			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(-15, 0, -40), big_table_scale, new THREE.Vector3());
-			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(42, 0, -10), big_table_scale, new THREE.Vector3(0,0, Math.PI));
-			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(5, 0, -10), big_table_scale, new THREE.Vector3(0,0, Math.PI));
+			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(42, 0, -10), big_table_scale, new THREE.Vector3(0, 0, Math.PI));
+			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(5, 0, -10), big_table_scale, new THREE.Vector3(0, 0, Math.PI));
 
 
 			// add white high-back sofa
@@ -399,14 +401,14 @@
 			loadObject("./obj/light/model.dae", new THREE.Vector3(120, 60, -80), lamp_scale, zero_rot);
 
 			// add red sofas on the right when first walk in
-			let red_chair_scale = new THREE.Vector3(1,1,1);
-			loadObject("./obj/red_chair/model.dae", new THREE.Vector3(-50, 0, 240), red_chair_scale, new THREE.Vector3(0,0,1.65));	// for coffee table (-50, 0, 225)
-			loadObject("./obj/red_chair/model.dae", new THREE.Vector3(30, 0, 230), red_chair_scale, new THREE.Vector3(0,0,-3.9));
-			loadObject("./obj/red_chair/model.dae", new THREE.Vector3(75, 0, 240), red_chair_scale, new THREE.Vector3(0,0,1.65));	// for coffee table (45, 0, 225)
-			loadObject("./obj/red_chair/model.dae", new THREE.Vector3(155, 0, 230), red_chair_scale, new THREE.Vector3(0,0,-3.9));
+			let red_chair_scale = new THREE.Vector3(1, 1, 1);
+			loadObject("./obj/red_chair/model.dae", new THREE.Vector3(-50, 0, 240), red_chair_scale, new THREE.Vector3(0, 0, 1.65));	// for coffee table (-50, 0, 225)
+			loadObject("./obj/red_chair/model.dae", new THREE.Vector3(30, 0, 230), red_chair_scale, new THREE.Vector3(0, 0, -3.9));
+			loadObject("./obj/red_chair/model.dae", new THREE.Vector3(75, 0, 240), red_chair_scale, new THREE.Vector3(0, 0, 1.65));	// for coffee table (45, 0, 225)
+			loadObject("./obj/red_chair/model.dae", new THREE.Vector3(155, 0, 230), red_chair_scale, new THREE.Vector3(0, 0, -3.9));
 
 			// add small round coffee tables to between red sofas on the right
-			let coffee_table_scale = new THREE.Vector3(1,1,1);
+			let coffee_table_scale = new THREE.Vector3(1, 1, 1);
 			loadObject("./obj/coffee_table/model.dae", new THREE.Vector3(-50, 0, 225), coffee_table_scale, zero_rot);
 			loadObject("./obj/coffee_table/model.dae", new THREE.Vector3(75, 0, 225), coffee_table_scale, zero_rot);
 
@@ -416,25 +418,25 @@
 			loadObject("./obj/table_lamp/model.dae", new THREE.Vector3(-25, 19, -182), tlamp_scale, table_hor);
 			addPointLight(new THREE.Vector3(-20, 32, -190), 0xffe98c, 50);
 			addPointLight(new THREE.Vector3(-40, 32, -190), 0xffe98c, 50);
-			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(-25, 0, -210), green_chair_scale, new THREE.Vector3(0,0,-1.2));
-			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(-50, 0, -200), green_chair_scale, new THREE.Vector3(0,0, 1));
-			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(-35, 0, -185), green_chair_scale, new THREE.Vector3(0,0, -3.4));
+			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(-25, 0, -210), green_chair_scale, new THREE.Vector3(0, 0, -1.2));
+			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(-50, 0, -200), green_chair_scale, new THREE.Vector3(0, 0, 1));
+			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(-35, 0, -185), green_chair_scale, new THREE.Vector3(0, 0, -3.4));
 
 			loadObject("./obj/large_round_table/model.dae", new THREE.Vector3(50, 0, -200), round_table_scale, zero_rot);
 			loadObject("./obj/table_lamp/model.dae", new THREE.Vector3(60, 19, -182), tlamp_scale, table_hor);
 			addPointLight(new THREE.Vector3(55, 32, -190), 0xffe98c, 50);
 			addPointLight(new THREE.Vector3(20, 32, -190), 0xffe98c, 50);
-			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(60, 0, -210), green_chair_scale, new THREE.Vector3(0,0,-1.2));
-			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(35, 0, -200), green_chair_scale, new THREE.Vector3(0,0, 1));
-			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(50, 0, -185), green_chair_scale, new THREE.Vector3(0,0, -3.4));
+			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(60, 0, -210), green_chair_scale, new THREE.Vector3(0, 0, -1.2));
+			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(35, 0, -200), green_chair_scale, new THREE.Vector3(0, 0, 1));
+			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(50, 0, -185), green_chair_scale, new THREE.Vector3(0, 0, -3.4));
 
 			loadObject("./obj/large_round_table/model.dae", new THREE.Vector3(130, 0, -200), round_table_scale, zero_rot);
 			loadObject("./obj/table_lamp/model.dae", new THREE.Vector3(140, 19, -182), tlamp_scale, table_hor);
 			addPointLight(new THREE.Vector3(135, 32, -190), 0xffe98c, 50);
 			addPointLight(new THREE.Vector3(100, 32, -190), 0xffe98c, 50);
-			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(140, 0, -210), green_chair_scale, new THREE.Vector3(0,0,-1.2));
-			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(115, 0, -200), green_chair_scale, new THREE.Vector3(0,0, 1));
-			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(130, 0, -185), green_chair_scale, new THREE.Vector3(0,0, -3.4));
+			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(140, 0, -210), green_chair_scale, new THREE.Vector3(0, 0, -1.2));
+			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(115, 0, -200), green_chair_scale, new THREE.Vector3(0, 0, 1));
+			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(130, 0, -185), green_chair_scale, new THREE.Vector3(0, 0, -3.4));
 
 
 
@@ -459,13 +461,13 @@
 			floortexture.offset.set(0, 0);
 			floortexture.repeat.set(40, 40);
 
-			var floorMaterial = new THREE.MeshStandardMaterial({ map: floortexture});
+			var floorMaterial = new THREE.MeshStandardMaterial({ map: floortexture });
 
 			var floor = new THREE.Mesh(floorGeometry, floorMaterial);
 			scene.add(floor);
 
 			// add walls
-			var wallMaterial = new THREE.MeshStandardMaterial({ color: 0xfffaef, side: THREE.DoubleSide});
+			var wallMaterial = new THREE.MeshStandardMaterial({ color: 0xfffaef, side: THREE.DoubleSide });
 			var back_wall = new THREE.Mesh(southWallGeometry, wallMaterial);
 			scene.add(back_wall);
 
@@ -478,15 +480,13 @@
 			var front_wall = new THREE.Mesh(frontWallGeometry, wallMaterial);
 			scene.add(front_wall);
 
-			var ceilMaterial = new THREE.MeshStandardMaterial({ color: 0xa8a7a4, side: THREE.DoubleSide});
+			var ceilMaterial = new THREE.MeshStandardMaterial({ color: 0xa8a7a4, side: THREE.DoubleSide });
 			var ceil = new THREE.Mesh(ceilGeometry, ceilMaterial);
 			scene.add(ceil);
 
 			window.addEventListener('resize', onWindowResize, false);
 
 			// add sample items
-			playerInventory.addItem('key', 1);
-			playerInventory.addItem('fuse', 1);
 			playerInventory.refreshRender();
 		}
 
@@ -503,12 +503,12 @@
 			var loader = new THREE.ColladaLoader();
 			var obj;
 			loader.convertUpAxis = true;
-			loader.load(filepath, function ( collada ) {
+			loader.load(filepath, function (collada) {
 
 				obj = collada.scene;
-				obj.position.x= pos.x;
-				obj.position.y= pos.y;
-				obj.position.z= pos.z;
+				obj.position.x = pos.x;
+				obj.position.y = pos.y;
+				obj.position.z = pos.z;
 				obj.scale.x = scale.x;
 				obj.scale.y = scale.y;
 				obj.scale.z = scale.z;
@@ -552,9 +552,9 @@
 					canJump = true;
 				}
 
-				controls.getObject().translateX( velocity.x * delta );
-				controls.getObject().position.y += ( velocity.y * delta ); // new behavior
-				controls.getObject().translateZ( velocity.z * delta );
+				controls.getObject().translateX(velocity.x * delta);
+				controls.getObject().position.y += (velocity.y * delta); // new behavior
+				controls.getObject().translateZ(velocity.z * delta);
 
 				// Code to handle not going through objects
 				// ------------------ START ---------------------
