@@ -104,7 +104,8 @@
 	<script>
 		var camera, scene, renderer, controls;
 		var objects = [];
-		var specialObjects = [];
+		var specialObjects = [];			// clues
+		var receivingObjects = []; 		// objects to which the clues can be applied
 		var raycaster;
 		var objectPointed;
 		var currIntersection;
@@ -131,6 +132,14 @@
 		var projector = new THREE.Projector();
 
 		var HIGHLIGHT_STATE;
+
+		function posInBounds(pos) {
+			if (pos.x >= -195 && pos.x <= 195) {
+				if (pos.z >= -240 && pos.z <= 240)
+					return true;
+			}
+			return false;
+		}
 
 		init();
 		animate();
@@ -345,10 +354,10 @@
 			// add prox sensor near the door
 			let sensor_scale = new THREE.Vector3(0.8, 0.8, 0.8);
 			let sensor_rot = new THREE.Vector3(0, 0, 0);
-			loadObject("./obj/prox_sensor/model.dae", new THREE.Vector3(-110, 20, -250), sensor_scale, sensor_rot);
+			loadObject("./obj/prox_sensor/model.dae", new THREE.Vector3(-110, 20, -250), sensor_scale, sensor_rot, false, "sensor", true);
 			// and fuse box
 			let fuse_box_scale = new THREE.Vector3(0.6, 0.6, 0.6);
-			loadObject("./obj/fusebox/model.dae", new THREE.Vector3(235, 20, -50), fuse_box_scale, new THREE.Vector3(0, 0, 3 * Math.PI / 2));
+			loadObject("./obj/fusebox/model.dae", new THREE.Vector3(235, 20, -50), fuse_box_scale, new THREE.Vector3(0, 0, 3 * Math.PI / 2), false, "fusebox", true);
 
 			// add red point light inside sensor (to indicate LOCKED state)
 			addPointLight(new THREE.Vector3(-110, 20, -240), 0xff0000, 11);
@@ -429,18 +438,18 @@
 			// loadObject("./obj/light/model.dae", new THREE.Vector3(120, 60, 80), lamp_scale, zero_rot);
 			// loadObject("./obj/light/model.dae", new THREE.Vector3(120, 60, -80), lamp_scale, zero_rot);
 
-			// add red sofas on the right when first walk in
+			// add red sofas and coffe tables on the right when first walk in, as well as drawer
 			let red_chair_scale = new THREE.Vector3(1, 1, 1);
-			// loadObject("./obj/red_chair/model.dae", new THREE.Vector3(-50, 0, 240), red_chair_scale, new THREE.Vector3(0, 0, 1.65));	// for coffee table (-50, 0, 225)
-			// loadObject("./obj/red_chair/model.dae", new THREE.Vector3(30, 0, 230), red_chair_scale, new THREE.Vector3(0, 0, -3.9));
-			// loadObject("./obj/red_chair/model.dae", new THREE.Vector3(75, 0, 240), red_chair_scale, new THREE.Vector3(0, 0, 1.65));	// for coffee table (45, 0, 225)
-			// loadObject("./obj/red_chair/model.dae", new THREE.Vector3(155, 0, 230), red_chair_scale, new THREE.Vector3(0, 0, -3.9));
-
-			// add small round coffee tables to between red sofas on the right
+			loadObject("./obj/red_chair/model.dae", new THREE.Vector3(-50, 0, 240), red_chair_scale, new THREE.Vector3(0, 0, 1.65));	// for coffee table (-50, 0, 225)
+			loadObject("./obj/red_chair/model.dae", new THREE.Vector3(30, 0, 230), red_chair_scale, new THREE.Vector3(0, 0, -3.9));
+			loadObject("./obj/red_chair/model.dae", new THREE.Vector3(75, 0, 240), red_chair_scale, new THREE.Vector3(0, 0, 1.65));	// for coffee table (45, 0, 225)
+			loadObject("./obj/red_chair/model.dae", new THREE.Vector3(155, 0, 230), red_chair_scale, new THREE.Vector3(0, 0, -3.9));
 			let coffee_table_scale = new THREE.Vector3(1, 1, 1);
-			// loadObject("./obj/coffee_table/model.dae", new THREE.Vector3(-50, 0, 225), coffee_table_scale, zero_rot);
-			// loadObject("./obj/coffee_table/model.dae", new THREE.Vector3(75, 0, 225), coffee_table_scale, zero_rot);
-			//
+			loadObject("./obj/coffee_table/model.dae", new THREE.Vector3(-50, 0, 225), coffee_table_scale, zero_rot);
+			loadObject("./obj/coffee_table/model.dae", new THREE.Vector3(75, 0, 225), coffee_table_scale, zero_rot);
+			loadObject("./obj/drawer/model.dae", new THREE.Vector3(70, 0, 70), coffee_table_scale, new THREE.Vector3(0,0,3*Math.PI/2));
+
+
 			// // add round tables in the back, next to "secret" door
 			// let round_table_scale = new THREE.Vector3(0.2, 0.2, 0.2);
 			// loadObject("./obj/large_round_table/model.dae", new THREE.Vector3(-35, 0, -200), round_table_scale, zero_rot);
@@ -540,7 +549,7 @@
 		}
 
 		// loads object from the given filepath and adds it to the scene
-		function loadObject(filepath, pos, scale, rotation, special = false, specialName = "") {
+		function loadObject(filepath, pos, scale, rotation, special = false, specialName = "", receiving = false) {
 
 			var loader = new THREE.ColladaLoader();
 			var obj;
@@ -563,13 +572,13 @@
 				obj.special = false;
 				if (special) {
 					specialObjects.push(obj);
-					// console.log(objects);
-					// console.log("in loadObject")
-					// console.log(obj.id);
-					// console.log(specialName);
-					obj.special = true;
+					// obj.special = true;
 					obj.name = specialName;
-					// console.log(obj);
+				}
+				if (receiving) {
+					receivingObjects.push(obj);
+					// obj.special = true;
+					obj.name = specialName;
 				}
 				scene.add(obj);
 			});
@@ -699,9 +708,24 @@
 					canJump = true;
 				}
 
+				// controls.getObject().translateX(velocity.x * delta);
+				// controls.getObject().position.y += (velocity.y * delta); // new behavior
+				// controls.getObject().translateZ(velocity.z * delta);
+
+				// Code to handle not going through walls
+				// ------------------ START ---------------------
+				// console.log(controls.getObject().position);
 				controls.getObject().translateX(velocity.x * delta);
 				controls.getObject().position.y += (velocity.y * delta); // new behavior
 				controls.getObject().translateZ(velocity.z * delta);
+				// console.log(posInBounds(controls.getObject().position));
+				if (!posInBounds(controls.getObject().position)) {
+					controls.getObject().translateX(-velocity.x * delta);
+					controls.getObject().position.y -= (velocity.y * delta); // new behavior
+					controls.getObject().translateZ(-velocity.z * delta);
+				}
+				// ------------------ END ----------------------
+
 
 				// Code to handle not going through objects
 				// ------------------ START ---------------------
