@@ -54,9 +54,32 @@ var checkPin = function() {
     }
 }
 
+var updateInstructions = function(htmlString) {
+    document.getElementById("instructions").innerHTML = htmlString;
+}
 
 var displayHint = function() {
-    var hintText = "You opened the drawer and found a scrap of paper! It says: <br><br>"
+    var hintText = "You opened the drawer and found a scrap of paper!<br><br>"
     hintText += "The fuse box seems to be broken... <br>"
     hintText += "But before you can fixed it, it must be unlocked!"
+
+    blocker.style.display = 'block';
+    updateInstructions(hintText);
+    document.getElementById('instructions').style.display = '';
+    hideForm();
+}
+
+var showRRR = function() {
+    var imgHtml = "<img id=\"RRR\" src=\"img/rrr_book.png\">"
+
+    blocker.style.display = 'block';
+    updateInstructions(imgHtml);
+    document.getElementById('instructions').style.display = 'block';
+    hideForm();
+}
+
+var hideRRR = function() {
+    blocker.style.display = 'none';
+    document.getElementById('instructions').style.display = 'none';
+    hideForm();
 }
