@@ -107,6 +107,7 @@
 		var specialObjects = [];
 		var raycaster;
 		var objectPointed;
+		var currIntersection;
 
 		var moveForward = false;
 		var moveBackward = false;
@@ -561,22 +562,27 @@
 				objects.push(obj);
 				obj.special = false;
 				if (special) {
-					// specialObjects.push(obj);
+					specialObjects.push(obj);
 					// console.log(objects);
-					console.log(obj.id);
-					console.log(specialName);
+					// console.log("in loadObject")
+					// console.log(obj.id);
+					// console.log(specialName);
 					obj.special = true;
-					obj.specialName = specialName;
+					obj.name = specialName;
+					// console.log(obj);
 				}
 				scene.add(obj);
 			});
 		}
 
 		function onMouseClick(event) {
-			console.log(objectPointed.id);
-			if (objectPointed) {
-				if (objectPointed.special){
-					playerInventory.addItem(objectPointed.specialName);
+			if (currIntersection) {					// this if condition not really necessary
+				for (var i = 0; i < specialObjects.length; i++) {
+					if (currIntersection.point.distanceTo(specialObjects[i].position) < 15) {
+						specialObjects[i].visible = false;
+						// console.log(specialObjects[i].name);
+						playerInventory.addItem(specialObjects[i].name);
+					}
 				}
 			}
 		}
@@ -599,6 +605,8 @@
 				// var intersects = raycaster2.intersectObjects(scene.children, true);
 				var intersects = ray.intersectObjects(scene.children, true);
 				if (intersects.length > 0) {
+					// console.log(intersects[0].object);
+
 					if (intersects[0].object != intersected) {
 						// restore previous intersection object (if it exists) to its original color
 						if (intersected !== null && intersected !== undefined) {
@@ -611,7 +619,9 @@
 
 						// store reference to closest object as current intersection object
 						intersected = intersects[0].object;
-						objectPointed = intersected;
+						// objectPointed = intersected;
+						currIntersection = intersects[0];
+
 						// store color of closest object (for later restoration)
 						intersected.currentHex = intersected.material.color.getHex();
 						// set a new color for closest object
@@ -637,7 +647,9 @@
 
 		        // store reference to closest object as current intersection object
 		        intersected = intersects[0].object;
-						objectPointed = intersected;
+						// objectPointed = intersected;
+						currIntersection = intersects[0];
+
 		        // store color of closest object (for later restoration)
 		        intersected.currentHex = intersected.material.color.getHex();
 		        // set a new color for closest object
