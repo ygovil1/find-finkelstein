@@ -73,7 +73,7 @@ Inventory = function(){
 			}
         }
         // console.log(self.selected)
-        self.refreshRender()
+        self.refreshRender();
     }
 
     // unselects everything
@@ -111,6 +111,10 @@ Inventory = function(){
         if (selected !== undefined) { 
             document.getElementById(selected).style.backgroundColor = "#888888";
         }
+        if (selected === "book")
+            showRRR();
+        else
+            hideRRR();
             
 	}
 

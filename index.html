@@ -130,16 +130,17 @@
 	<div id="blocker">
 
 		<div id="pinEnter" class="form-group">
-			<span style="font-size:20px"> Please enter the pin to access the Fuse box:</span>
 
 			<form id="pinForm" action="javascript:checkPin();">
+				<span style="font-size:20px"> Please enter the pin to access the Fuse box:</span>
 				<div align="center" id="inputbox">
 					<input type="text" class="form-control" name="pin" value="000"><br>
 				</div>
 				<input type="submit" value="Unlock" class="btn btn-primary" style="background-color: #16a803">
 			</form>
 
-			<span id="correctPinMsg"> You entered the correct pin! The Fuse Box is now open. </span>
+			<span id="correctPinMsg" style="font-size:20px"> You entered the correct pin! <br> The Fuse Box is now open.
+			</span>
 
 		</div>
 
@@ -699,7 +700,8 @@
 					if (currIntersection.point.distanceTo(keyhole) < 15) {
 						console.log("drawer unlocked!");
 						playerInventory.removeItem("key");
-						// return;
+						showHint();
+						return;
 					}
 				}
 				// fuse to fusebox, or just enterring pin to fusebox
