@@ -73,6 +73,31 @@
 			max-width: 80%;
 			max-height: 80%;
 		}
+
+		#pinEnter {
+			display: none;
+			width: 100%;
+			height: 20%;
+			display: -webkit-box;
+			display: -moz-box;
+			/* display: box; */
+			-webkit-box-orient: horizontal;
+			-moz-box-orient: horizontal;
+			box-orient: horizontal;
+			-webkit-box-pack: center;
+			-moz-box-pack: center;
+			box-pack: center;
+			-webkit-box-align: center;
+			-moz-box-align: center;
+			box-align: center;
+			color: #ffffff;
+			text-align: center;
+			cursor: pointer;
+		}
+
+		#correctPinMsg {
+			display: none;
+		}
 	</style>
 </head>
 
@@ -85,6 +110,18 @@
 
 	<div id="blocker">
 
+		<div id="pinEnter">
+			<span style="font-size:28px"> Please enter the pin to access the Fuse box </span>
+
+			<form id="pinForm" action="javascript:checkPin();">
+				<input type="text" name="pin" value="000"><br>
+				<input type="submit" value="Submit">
+			</form>
+
+			<span id="correctPinMsg"> You entered the correct pin! The Fuse Box is now open. </span>
+
+		</div>
+
 		<div id="instructions">
 			<span style="font-size:40px">Looking for Finkelstein?</span>
 			<br /><br>
@@ -92,6 +129,7 @@
 			You need to submit your 426 Dean's Date assignment but you can't find your Graphics professor! Gather clues to
 			find him. <br><br>
 			Move forward and backward with Up and Down keys. Rotate views with your mouse.<br><br>
+			Press Enter to interact with objects in the room or in your inventory. <br><br>
 			Press Esc to pause game. Click anywhere to begin.
 		</div>
 
@@ -100,6 +138,7 @@
 	<div id="inventory"></div>
 
 	<script src="js/Inventory.js"></script>
+	<script src="js/Form.js"></script>
 
 	<script>
 		var camera, scene, renderer, controls;
@@ -132,6 +171,7 @@
 		var projector = new THREE.Projector();
 
 		var keyhole = new THREE.Vector3(180, 43, 150);
+		var blocker = document.getElementById('blocker');
 
 		var HIGHLIGHT_STATE;
 
@@ -147,6 +187,7 @@
 
 		init();
 		animate();
+		hideForm();
 
 		window.addEventListener('mousemove', onMouseMove, false);
 
@@ -164,8 +205,6 @@
 
 			controls = new THREE.PointerLockControls(camera);
 
-
-			var blocker = document.getElementById('blocker');
 			var instructions = document.getElementById('instructions');
 			instructions.addEventListener('click', function () {
 				controls.lock();
@@ -219,7 +258,10 @@
 					case 66: // b
 						playerInventory.toggleItem('book');
 						break;
-					case 13:
+					case 85: //u
+						togglePinEnter();
+						break;
+					case 16:
 						if (controls.isLocked) {
 							HIGHLIGHT_STATE = true;
 							controls.unlock();
@@ -456,31 +498,31 @@
 			// loadObject("./obj/fuse/model.dae", new THREE.Vector3(180, 43, 150), coffee_table_scale, zero_rot);
 
 
-			// // add round tables in the back, next to "secret" door
-			// let round_table_scale = new THREE.Vector3(0.2, 0.2, 0.2);
-			// loadObject("./obj/large_round_table/model.dae", new THREE.Vector3(-35, 0, -200), round_table_scale, zero_rot);
-			// loadObject("./obj/table_lamp/model.dae", new THREE.Vector3(-25, 19, -182), tlamp_scale, table_hor);
-			// addPointLight(new THREE.Vector3(-20, 32, -190), 0xffe98c, 50);
-			// addPointLight(new THREE.Vector3(-40, 32, -190), 0xffe98c, 50);
-			// loadObject("./obj/green_chair/model.dae", new THREE.Vector3(-25, 0, -210), green_chair_scale, new THREE.Vector3(0, 0, -1.2));
-			// loadObject("./obj/green_chair/model.dae", new THREE.Vector3(-50, 0, -200), green_chair_scale, new THREE.Vector3(0, 0, 1));
-			// loadObject("./obj/green_chair/model.dae", new THREE.Vector3(-35, 0, -185), green_chair_scale, new THREE.Vector3(0, 0, -3.4));
-			//
-			// loadObject("./obj/large_round_table/model.dae", new THREE.Vector3(50, 0, -200), round_table_scale, zero_rot);
-			// loadObject("./obj/table_lamp/model.dae", new THREE.Vector3(60, 19, -182), tlamp_scale, table_hor);
-			// addPointLight(new THREE.Vector3(55, 32, -190), 0xffe98c, 50);
-			// addPointLight(new THREE.Vector3(20, 32, -190), 0xffe98c, 50);
-			// loadObject("./obj/green_chair/model.dae", new THREE.Vector3(60, 0, -210), green_chair_scale, new THREE.Vector3(0, 0, -1.2));
-			// loadObject("./obj/green_chair/model.dae", new THREE.Vector3(35, 0, -200), green_chair_scale, new THREE.Vector3(0, 0, 1));
-			// loadObject("./obj/green_chair/model.dae", new THREE.Vector3(50, 0, -185), green_chair_scale, new THREE.Vector3(0, 0, -3.4));
-			//
-			// loadObject("./obj/large_round_table/model.dae", new THREE.Vector3(130, 0, -200), round_table_scale, zero_rot);
-			// loadObject("./obj/table_lamp/model.dae", new THREE.Vector3(140, 19, -182), tlamp_scale, table_hor);
-			// addPointLight(new THREE.Vector3(135, 32, -190), 0xffe98c, 50);
-			// addPointLight(new THREE.Vector3(100, 32, -190), 0xffe98c, 50);
-			// loadObject("./obj/green_chair/model.dae", new THREE.Vector3(140, 0, -210), green_chair_scale, new THREE.Vector3(0, 0, -1.2));
-			// loadObject("./obj/green_chair/model.dae", new THREE.Vector3(115, 0, -200), green_chair_scale, new THREE.Vector3(0, 0, 1));
-			// loadObject("./obj/green_chair/model.dae", new THREE.Vector3(130, 0, -185), green_chair_scale, new THREE.Vector3(0, 0, -3.4));
+			// add round tables in the back, next to "secret" door
+			let round_table_scale = new THREE.Vector3(0.2, 0.2, 0.2);
+			loadObject("./obj/large_round_table/model.dae", new THREE.Vector3(-35, 0, -200), round_table_scale, zero_rot);
+			loadObject("./obj/table_lamp/model.dae", new THREE.Vector3(-25, 19, -182), tlamp_scale, table_hor);
+			addPointLight(new THREE.Vector3(-20, 32, -190), 0xffe98c, 50);
+			addPointLight(new THREE.Vector3(-40, 32, -190), 0xffe98c, 50);
+			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(-25, 0, -210), green_chair_scale, new THREE.Vector3(0, 0, -1.2));
+			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(-50, 0, -200), green_chair_scale, new THREE.Vector3(0, 0, 1));
+			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(-35, 0, -185), green_chair_scale, new THREE.Vector3(0, 0, -3.4));
+
+			loadObject("./obj/large_round_table/model.dae", new THREE.Vector3(50, 0, -200), round_table_scale, zero_rot);
+			loadObject("./obj/table_lamp/model.dae", new THREE.Vector3(60, 19, -182), tlamp_scale, table_hor);
+			addPointLight(new THREE.Vector3(55, 32, -190), 0xffe98c, 50);
+			addPointLight(new THREE.Vector3(20, 32, -190), 0xffe98c, 50);
+			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(60, 0, -210), green_chair_scale, new THREE.Vector3(0, 0, -1.2));
+			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(35, 0, -200), green_chair_scale, new THREE.Vector3(0, 0, 1));
+			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(50, 0, -185), green_chair_scale, new THREE.Vector3(0, 0, -3.4));
+
+			loadObject("./obj/large_round_table/model.dae", new THREE.Vector3(130, 0, -200), round_table_scale, zero_rot);
+			loadObject("./obj/table_lamp/model.dae", new THREE.Vector3(140, 19, -182), tlamp_scale, table_hor);
+			addPointLight(new THREE.Vector3(135, 32, -190), 0xffe98c, 50);
+			addPointLight(new THREE.Vector3(100, 32, -190), 0xffe98c, 50);
+			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(140, 0, -210), green_chair_scale, new THREE.Vector3(0, 0, -1.2));
+			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(115, 0, -200), green_chair_scale, new THREE.Vector3(0, 0, 1));
+			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(130, 0, -185), green_chair_scale, new THREE.Vector3(0, 0, -3.4));
 
 			// add lights inside lamps
 			addPointLight(new THREE.Vector3(-120, 40, 0), 0xf2d637, 90);
@@ -511,7 +553,7 @@
 			/* -------------------- START ------------------- */
 			// open book
 			let open_book_scale = new THREE.Vector3(0.6, 0.6, 0.6);
-			loadObject("./obj/open_book/model.dae", new THREE.Vector3(40, 18, 150), open_book_scale, new THREE.Vector3(0, 0, -Math.PI/4));
+			loadObject("./obj/open_book/model.dae", new THREE.Vector3(40, 17.5, 150), open_book_scale, new THREE.Vector3(0, 0, -Math.PI/4));
 
 			// pen and paper
 			let paper_scale = new THREE.Vector3(0.02, 0.02, 0.02);
@@ -687,17 +729,26 @@
 						currIntersection = intersects[0];
 
 						// store color of closest object (for later restoration)
-						intersected.currentHex = intersected.material.color.getHex();
+						if (intersected.material.color === undefined)
+							intersected.currentHex = intersected.material[1].color.getHex();
+						else intersected.currentHex = intersected.material.color.getHex();
 						// set a new color for closest object
-						intersected.material.color.setHex(0xffff00);
-						intersects[0].object.material.color.setHex(0x4af76c);
+
+						// intersected.material.color.setHex(0xffff00);
+						if (intersected.material.color === undefined)
+							intersects[0].object.material[1].color.setHex(0x4af76c);
+						else intersects[0].object.material.color.setHex(0x4af76c);
 					}
 				}
 				else // there are no intersections
 				{
 					// restore previous intersection object (if it exists) to its original color
-					if (intersected)
-						intersected.material.color.setHex(intersected.currentHex);
+					if (intersected) {
+						if (intersected.material.color === undefined)
+							intersected.material[1].color.setHex(intersected.currentHex);
+
+						else intersected.material.color.setHex(intersected.currentHex);
+					}
 					// remove previous intersection object reference
 					//     by setting current intersection object to "nothing"
 					intersected = null;
