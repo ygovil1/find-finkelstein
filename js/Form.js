@@ -49,5 +49,6 @@ var checkPin = function() {
     if (pin === correctPin) {
         console.log("Correct pin!");
         document.getElementById("correctPinMsg").style.display = "block";
+        fuseBoxUnlocked = true;
     }
 }
