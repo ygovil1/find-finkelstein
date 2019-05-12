@@ -56,7 +56,7 @@ var checkPin = function() {
 
 
 var displayHint = function() {
-    var hintText = "You opened the drawer and found a scrap of paper! It says: <br><br>"
+    var hintText = "You opened the drawer and found a scrap of paper!<br><br>"
     hintText += "The fuse box seems to be broken... <br>"
     hintText += "But before you can fixed it, it must be unlocked!"
 }
