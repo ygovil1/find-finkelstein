@@ -104,6 +104,7 @@
 	<script>
 		var camera, scene, renderer, controls;
 		var objects = [];
+		var specialObjects = [];
 		var raycaster;
 
 		var moveForward = false;
@@ -136,8 +137,8 @@
 
 		function init() {
 			camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1000);
-			camera.position.set(-100, 50, 200); // Set position like this
-			// camera.position.set(-100, 50, -200);			// this position is for editing items on the other side of the room
+			// camera.position.set(-100, 50, 200); // Set position like this
+			camera.position.set(-100, 50, -200);			// this position is for editing items on the other side of the room
 			camera.lookAt(new THREE.Vector3(-100, 50, -250));
 			scene = new THREE.Scene();
 			scene.background = new THREE.Color(0xffffff);
@@ -341,7 +342,10 @@
 			// add prox sensor near the door
 			let sensor_scale = new THREE.Vector3(0.8, 0.8, 0.8);
 			let sensor_rot = new THREE.Vector3(0, 0, 0);
-			loadObject("./obj/prox_sensor/model.dae", new THREE.Vector3(-110, 20, -245), sensor_scale, sensor_rot);
+			loadObject("./obj/prox_sensor/model.dae", new THREE.Vector3(-110, 20, -250), sensor_scale,sensor_rot);
+			// and fuse box
+			let fuse_box_scale = new THREE.Vector3(0.6, 0.6, 0.6);
+			loadObject("./obj/fusebox/model.dae", new THREE.Vector3(235, 20, -50), fuse_box_scale, new THREE.Vector3(0, 0, 3* Math.PI / 2));
 
 			// add red point light inside sensor (to indicate LOCKED state)
 			addPointLight(new THREE.Vector3(-110, 20, -240), 0xff0000, 11);
@@ -357,7 +361,7 @@
 			loadObject("./obj/wooden_table/model.dae", new THREE.Vector3(-80, 0, -50), big_table_scale, table_hor);
 
 			// wooden tables and green chairs between red sofas and front bookshelves
-			loadObject("./obj/wooden_table/model.dae", new THREE.Vector3(55, 0, 150), big_table_scale, table_hor);
+			// loadObject("./obj/wooden_table/model.dae", new THREE.Vector3(55, 0, 150), big_table_scale, table_hor);
 			let green_chair_scale = new THREE.Vector3(0.75, 0.75, 0.75);
 			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(27, 0, 120), green_chair_scale, new THREE.Vector3());		// for table (55, 0, 150)
 			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(-10, 0, 120), green_chair_scale, new THREE.Vector3());
@@ -366,15 +370,15 @@
 
 			// add table lamps to wooden table in the middle of the bookshelves
 			let tlamp_scale = new THREE.Vector3(1, 1, 0.7);
-			loadObject("./obj/table_lamp/model.dae", new THREE.Vector3(45, 17, -5), tlamp_scale, table_hor);
-			loadObject("./obj/table_lamp/model.dae", new THREE.Vector3(25, 17, -5), tlamp_scale, table_hor);
-			loadObject("./obj/table_lamp/model.dae", new THREE.Vector3(5, 17, -5), tlamp_scale, table_hor);
-			loadObject("./obj/table_lamp/model.dae", new THREE.Vector3(-90, 17, 110), tlamp_scale, table_hor);
-			loadObject("./obj/table_lamp/model.dae", new THREE.Vector3(-115, 17, 110), tlamp_scale, table_hor);
-			loadObject("./obj/table_lamp/model.dae", new THREE.Vector3(-90, 17, -40), tlamp_scale, table_hor);
-			loadObject("./obj/table_lamp/model.dae", new THREE.Vector3(-115, 17, -40), tlamp_scale, table_hor);
-			loadObject("./obj/table_lamp/model.dae", new THREE.Vector3(45, 17, 155), tlamp_scale, table_hor);				// for table on right in front of red sofas
-			loadObject("./obj/table_lamp/model.dae", new THREE.Vector3(20, 17, 155), tlamp_scale, table_hor);
+			// loadObject("./obj/table_lamp/model.dae", new THREE.Vector3(45, 17, -5), tlamp_scale, table_hor);
+			// loadObject("./obj/table_lamp/model.dae", new THREE.Vector3(25, 17, -5), tlamp_scale, table_hor);
+			// loadObject("./obj/table_lamp/model.dae", new THREE.Vector3(5, 17, -5), tlamp_scale, table_hor);
+			// loadObject("./obj/table_lamp/model.dae", new THREE.Vector3(-90, 17, 110), tlamp_scale, table_hor);
+			// loadObject("./obj/table_lamp/model.dae", new THREE.Vector3(-115, 17, 110), tlamp_scale, table_hor);
+			// loadObject("./obj/table_lamp/model.dae", new THREE.Vector3(-90, 17, -40), tlamp_scale, table_hor);
+			// loadObject("./obj/table_lamp/model.dae", new THREE.Vector3(-115, 17, -40), tlamp_scale, table_hor);
+			// loadObject("./obj/table_lamp/model.dae", new THREE.Vector3(45, 17, 155), tlamp_scale, table_hor);				// for table on right in front of red sofas
+			// loadObject("./obj/table_lamp/model.dae", new THREE.Vector3(20, 17, 155), tlamp_scale, table_hor);
 
 			// add green chairs by wooden tables
 			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(-108, 0, 70), green_chair_scale, new THREE.Vector3());		// for table (-80,0, 100)
@@ -464,9 +468,16 @@
 
 			// book on table
 			let bscale = new THREE.Vector3(0.8, 0.8, 0.8);
-			loadObject("./obj/book/model.dae", new THREE.Vector3(41, 18, -18), bscale, zero_rot);
-
-
+			loadObject("./obj/book/model.dae", new THREE.Vector3(41, 18, -18), bscale, zero_rot, true);
+			// prox / id card
+			let prox_scale = new THREE.Vector3(1.2, 1.2, 1.2);
+			loadObject("./obj/id_card/model.dae", new THREE.Vector3(62, 14, 225), prox_scale, zero_rot, true);
+			// key
+			let key_scale = new THREE.Vector3(0.05, 0.05, 0.05);
+			loadObject("./obj/key/model.dae", new THREE.Vector3(-138, 0, 30), key_scale, new THREE.Vector3(0,0.6,0), true);
+			// fuse
+			let fuse_scale = new THREE.Vector3(0.8, 0.8, 0.8);
+			loadObject("./obj/fuse/model.dae", new THREE.Vector3(55, 20, -190), fuse_scale, new THREE.Vector3(0,Math.PI / 2,0), true);
 
 			/* -------------------- END --------------------- */
 
@@ -527,7 +538,7 @@
 		}
 
 		// loads object from the given filepath and adds it to the scene
-		function loadObject(filepath, pos, scale, rotation) {
+		function loadObject(filepath, pos, scale, rotation, special=false) {
 
 			var loader = new THREE.ColladaLoader();
 			var obj;
@@ -547,6 +558,11 @@
 
 				obj.castShadow = true;
 				objects.push(obj);
+				if (special) {
+					specialObjects.push(obj);
+					// console.log(objects);
+					console.log(specialObjects);
+				}
 				scene.add(obj);
 			});
 		}
@@ -604,11 +620,26 @@
 
 			if (!HIGHLIGHT_STATE) {
 				// restore previous intersection object (if it exists) to its original color
-				if (intersected)
-					intersected.material.color.setHex(intersected.currentHex);
-				// remove previous intersection object reference
-				//     by setting current intersection object to "nothing"
-				intersected = null;
+		        if ( intersected )
+		            intersected.material.color.setHex( intersected.currentHex );
+
+		        // store reference to closest object as current intersection object
+		        intersected = intersects[0].object;
+		        // store color of closest object (for later restoration)
+		        intersected.currentHex = intersected.material.color.getHex();
+		        // set a new color for closest object
+		        intersected.material.color.setHex(0xffff00);
+        		intersects[0].object.material.color.setHex(0xffffff );
+    			}
+    		}
+    		else // there are no intersections
+			{
+			    // restore previous intersection object (if it exists) to its original color
+			    if ( intersected )
+			        intersected.material.color.setHex( intersected.currentHex );
+			    // remove previous intersection object reference
+			    //     by setting current intersection object to "nothing"
+			    intersected = null;
 			}
 		}
 
