@@ -132,7 +132,7 @@
 
 		<div id="pinEnter" class="form-group">
 			<span style="font-size:20px"> Please enter the pin to access the Fuse box:</span>
-			
+
 			<form id="pinForm" action="javascript:checkPin();">
 				<div align="center" id="inputbox">
 					<input type="text" class="form-control" name="pin" value="000"><br>
@@ -710,6 +710,7 @@
 					else {
 						if (fuseBoxUnlocked) {
 							console.log("activating fuse");
+							proxLight.color.set(0x5cf442);
 							fuseActivated = true;
 							playerInventory.removeItem("fuse");
 						}
