@@ -10,8 +10,6 @@ var showForm = function() {
 }
 
 var hideForm = function() {
-    if (!form_showing)
-        return;
     document.getElementById("pinEnter").style.display = "none";
     form_showing = false;
 }
@@ -75,8 +73,8 @@ var showRRR = function() {
     var imgHtml = "<img id=\"RRR\" src=\"img/rrr_book.png\">"
 
     blocker.style.display = 'block';
-    updateInstructions(hintText);
-    document.getElementById('instructions').style.display = '';
+    updateInstructions(imgHtml);
+    document.getElementById('instructions').style.display = 'block';
     hideForm();
 }
 
