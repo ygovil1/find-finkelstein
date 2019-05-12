@@ -49,6 +49,14 @@ var checkPin = function() {
     if (pin === correctPin) {
         console.log("Correct pin!");
         document.getElementById("correctPinMsg").style.display = "block";
+        form.style.display = "none";
         fuseBoxUnlocked = true;
     }
+}
+
+
+var displayHint = function() {
+    var hintText = "You opened the drawer and found a scrap of paper! It says: <br><br>"
+    hintText += "The fuse box seems to be broken... <br>"
+    hintText += "But before you can fixed it, it must be unlocked!"
 }

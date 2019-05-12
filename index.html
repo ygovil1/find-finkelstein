@@ -99,7 +99,7 @@
 			box-align: center;
 			color: #ffffff;
 			position: absolute;
-			margin:auto;
+			margin: auto;
 			top: 50%;
 			line-height: 30px;
 			text-align: center;
@@ -113,11 +113,10 @@
 		#inputbox {
 			text-align: center;
 			position: relative;
-			margin:auto;
+			margin: auto;
 			width: 50px;
 			height: 50px;
 		}
-
 	</style>
 </head>
 
@@ -137,7 +136,7 @@
 				<div align="center" id="inputbox">
 					<input type="text" class="form-control" name="pin" value="000"><br>
 				</div>
-				<input type="submit" value="Activate" class="btn btn-primary" style="background-color: #16a803">
+				<input type="submit" value="Unlock" class="btn btn-primary" style="background-color: #16a803">
 			</form>
 
 			<span id="correctPinMsg"> You entered the correct pin! The Fuse Box is now open. </span>
@@ -798,30 +797,11 @@
 
 			if (!HIGHLIGHT_STATE) {
 				// restore previous intersection object (if it exists) to its original color
-				if (intersected) {
+				if (intersected)
 					intersected.material.color.setHex(intersected.currentHex);
-
-					// store reference to closest object as current intersection object
-					intersected = intersects[0].object;
-					// objectPointed = intersected;
-					currIntersection = intersects[0];
-
-					// store color of closest object (for later restoration)
-					intersected.currentHex = intersected.material.color.getHex();
-					// set a new color for closest object
-					intersected.material.color.setHex(0xffff00);
-					intersects[0].object.material.color.setHex(0xffffff);
-				}
-
-				else // there are no intersections
-				{
-					// restore previous intersection object (if it exists) to its original color
-					if (intersected)
-						intersected.material.color.setHex(intersected.currentHex);
-					// remove previous intersection object reference
-					//     by setting current intersection object to "nothing"
-					intersected = null;
-				}
+				// remove previous intersection object reference
+				//     by setting current intersection object to "nothing"
+				intersected = null;
 			}
 		}
 
