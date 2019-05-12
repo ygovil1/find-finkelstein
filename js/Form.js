@@ -59,8 +59,8 @@ var updateInstructions = function(htmlString) {
 }
 
 var showHint = function() {
-    var hintText = "You opened the drawer and found a scrap of paper!<br><br>"
-    hintText += "<img id=\"hint\" src=\"img/scrap_hint.png\">";
+    // var hintText = "You opened the drawer and found a scrap of paper!<br><br>"
+    var hintText = "<img id=\"hint\" src=\"img/scrap_hint.png\">";
     // hintText += "The fuse box seems to be broken... <br>"
     // hintText += "But before you can fixed it, it must be unlocked!"
 

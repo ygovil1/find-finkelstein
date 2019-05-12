@@ -123,6 +123,12 @@
 			display: box;
 			top: 50%;
 		}
+
+		#hint {
+			display: box;
+			height: 80%;
+			top:50%;
+		}
 	</style>
 </head>
 
@@ -227,8 +233,8 @@
 
 		function init() {
 			camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1000);
-			// camera.position.set(-100, 50, 200); // Set position like this
-			camera.position.set(-100, 50, -200);			// this position is for editing items on the other side of the room
+			camera.position.set(-100, 50, 200); // Set position like this
+			// camera.position.set(-100, 50, -200);			// this position is for editing items on the other side of the room
 			camera.lookAt(new THREE.Vector3(-100, 50, -250));
 			scene = new THREE.Scene();
 			scene.background = new THREE.Color(0xffffff);
