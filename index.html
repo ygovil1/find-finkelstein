@@ -191,6 +191,7 @@
 		var projector = new THREE.Projector();
 
 		var keyhole = new THREE.Vector3(180, 43, 150);
+		var fusebox = new THREE.Vector3(195, 40, -65);
 		var blocker = document.getElementById('blocker');
 
 		var HIGHLIGHT_STATE;
@@ -428,6 +429,7 @@
 			// and fuse box
 			let fuse_box_scale = new THREE.Vector3(0.6, 0.6, 0.6);
 			loadObject("./obj/fusebox/model.dae", new THREE.Vector3(235, 20, -50), fuse_box_scale, new THREE.Vector3(0, 0, 3 * Math.PI / 2), false, "fusebox", true);
+			// loadObject("./obj/fuse/model.dae", new THREE.Vector3(195, 40, -65), new THREE.Vector3(1,1,1), zero_rot);
 
 			// add red point light inside sensor (to indicate LOCKED state)
 			proxLight = new THREE.PointLight(0xff0000, 1, 11);
@@ -483,10 +485,10 @@
 			// add white high-back sofa
 			let sofa_scale = new THREE.Vector3(0.6, 0.6, 0.8);
 			let sofa_rot = new THREE.Vector3(0, 0, -Math.PI);
-			loadObject("./obj/white_sofa/model.dae", new THREE.Vector3(-90, 0, 0), sofa_scale, zero_rot);
-			loadObject("./obj/white_sofa/model.dae", new THREE.Vector3(-138, 0, 30), sofa_scale, sofa_rot);
-			// add small wooden table between white sofas
-			loadObject("./obj/wooden_table/model.dae", new THREE.Vector3(-90, 0, 25), new THREE.Vector3(0.5, 0.75, 0.5), table_hor);
+			// loadObject("./obj/white_sofa/model.dae", new THREE.Vector3(-90, 0, 0), sofa_scale, zero_rot);
+			// loadObject("./obj/white_sofa/model.dae", new THREE.Vector3(-138, 0, 30), sofa_scale, sofa_rot);
+			// // add small wooden table between white sofas
+			// loadObject("./obj/wooden_table/model.dae", new THREE.Vector3(-90, 0, 25), new THREE.Vector3(0.5, 0.75, 0.5), table_hor);
 
 			// add point lights inside table lamps
 			addPointLight(new THREE.Vector3(5, 30, -45), 0xffe98c, 50);
@@ -519,34 +521,32 @@
 			// loadObject("./obj/coffee_table/model.dae", new THREE.Vector3(-50, 0, 225), coffee_table_scale, zero_rot);
 			// loadObject("./obj/coffee_table/model.dae", new THREE.Vector3(75, 0, 225), coffee_table_scale, zero_rot);
 			loadObject("./obj/drawer/model.dae", new THREE.Vector3(70, 0, 70), coffee_table_scale, new THREE.Vector3(0, 0, 3 * Math.PI / 2), false, "drawer", true);
-			// loadObject("./obj/fuse/model.dae", new THREE.Vector3(180, 43, 150), coffee_table_scale, zero_rot);
-
 
 			// add round tables in the back, next to "secret" door
 			let round_table_scale = new THREE.Vector3(0.2, 0.2, 0.2);
-			loadObject("./obj/large_round_table/model.dae", new THREE.Vector3(-35, 0, -200), round_table_scale, zero_rot);
-			loadObject("./obj/table_lamp/model.dae", new THREE.Vector3(-25, 19, -182), tlamp_scale, table_hor);
-			addPointLight(new THREE.Vector3(-20, 32, -190), 0xffe98c, 50);
-			addPointLight(new THREE.Vector3(-40, 32, -190), 0xffe98c, 50);
-			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(-25, 0, -210), green_chair_scale, new THREE.Vector3(0, 0, -1.2));
-			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(-50, 0, -200), green_chair_scale, new THREE.Vector3(0, 0, 1));
-			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(-35, 0, -185), green_chair_scale, new THREE.Vector3(0, 0, -3.4));
-
-			loadObject("./obj/large_round_table/model.dae", new THREE.Vector3(50, 0, -200), round_table_scale, zero_rot);
-			loadObject("./obj/table_lamp/model.dae", new THREE.Vector3(60, 19, -182), tlamp_scale, table_hor);
-			addPointLight(new THREE.Vector3(55, 32, -190), 0xffe98c, 50);
-			addPointLight(new THREE.Vector3(20, 32, -190), 0xffe98c, 50);
-			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(60, 0, -210), green_chair_scale, new THREE.Vector3(0, 0, -1.2));
-			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(35, 0, -200), green_chair_scale, new THREE.Vector3(0, 0, 1));
-			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(50, 0, -185), green_chair_scale, new THREE.Vector3(0, 0, -3.4));
-
-			loadObject("./obj/large_round_table/model.dae", new THREE.Vector3(130, 0, -200), round_table_scale, zero_rot);
-			loadObject("./obj/table_lamp/model.dae", new THREE.Vector3(140, 19, -182), tlamp_scale, table_hor);
-			addPointLight(new THREE.Vector3(135, 32, -190), 0xffe98c, 50);
-			addPointLight(new THREE.Vector3(100, 32, -190), 0xffe98c, 50);
-			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(140, 0, -210), green_chair_scale, new THREE.Vector3(0, 0, -1.2));
-			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(115, 0, -200), green_chair_scale, new THREE.Vector3(0, 0, 1));
-			loadObject("./obj/green_chair/model.dae", new THREE.Vector3(130, 0, -185), green_chair_scale, new THREE.Vector3(0, 0, -3.4));
+			// loadObject("./obj/large_round_table/model.dae", new THREE.Vector3(-35, 0, -200), round_table_scale, zero_rot);
+			// loadObject("./obj/table_lamp/model.dae", new THREE.Vector3(-25, 19, -182), tlamp_scale, table_hor);
+			// addPointLight(new THREE.Vector3(-20, 32, -190), 0xffe98c, 50);
+			// addPointLight(new THREE.Vector3(-40, 32, -190), 0xffe98c, 50);
+			// loadObject("./obj/green_chair/model.dae", new THREE.Vector3(-25, 0, -210), green_chair_scale, new THREE.Vector3(0, 0, -1.2));
+			// loadObject("./obj/green_chair/model.dae", new THREE.Vector3(-50, 0, -200), green_chair_scale, new THREE.Vector3(0, 0, 1));
+			// loadObject("./obj/green_chair/model.dae", new THREE.Vector3(-35, 0, -185), green_chair_scale, new THREE.Vector3(0, 0, -3.4));
+			//
+			// loadObject("./obj/large_round_table/model.dae", new THREE.Vector3(50, 0, -200), round_table_scale, zero_rot);
+			// loadObject("./obj/table_lamp/model.dae", new THREE.Vector3(60, 19, -182), tlamp_scale, table_hor);
+			// addPointLight(new THREE.Vector3(55, 32, -190), 0xffe98c, 50);
+			// addPointLight(new THREE.Vector3(20, 32, -190), 0xffe98c, 50);
+			// loadObject("./obj/green_chair/model.dae", new THREE.Vector3(60, 0, -210), green_chair_scale, new THREE.Vector3(0, 0, -1.2));
+			// loadObject("./obj/green_chair/model.dae", new THREE.Vector3(35, 0, -200), green_chair_scale, new THREE.Vector3(0, 0, 1));
+			// loadObject("./obj/green_chair/model.dae", new THREE.Vector3(50, 0, -185), green_chair_scale, new THREE.Vector3(0, 0, -3.4));
+			//
+			// loadObject("./obj/large_round_table/model.dae", new THREE.Vector3(130, 0, -200), round_table_scale, zero_rot);
+			// loadObject("./obj/table_lamp/model.dae", new THREE.Vector3(140, 19, -182), tlamp_scale, table_hor);
+			// addPointLight(new THREE.Vector3(135, 32, -190), 0xffe98c, 50);
+			// addPointLight(new THREE.Vector3(100, 32, -190), 0xffe98c, 50);
+			// loadObject("./obj/green_chair/model.dae", new THREE.Vector3(140, 0, -210), green_chair_scale, new THREE.Vector3(0, 0, -1.2));
+			// loadObject("./obj/green_chair/model.dae", new THREE.Vector3(115, 0, -200), green_chair_scale, new THREE.Vector3(0, 0, 1));
+			// loadObject("./obj/green_chair/model.dae", new THREE.Vector3(130, 0, -185), green_chair_scale, new THREE.Vector3(0, 0, -3.4));
 
 			// add lights inside lamps
 			addPointLight(new THREE.Vector3(-120, 40, 0), 0xf2d637, 90);
@@ -576,25 +576,25 @@
 			// add misc objects to find
 			/* -------------------- START ------------------- */
 			// open book
-			let open_book_scale = new THREE.Vector3(0.6, 0.6, 0.6);
-			loadObject("./obj/open_book/model.dae", new THREE.Vector3(40, 17.5, 150), open_book_scale, new THREE.Vector3(0, 0, -Math.PI / 4));
-
-			// pen and paper
-			let paper_scale = new THREE.Vector3(0.02, 0.02, 0.02);
-			loadObject("./obj/pencil_paper/model.dae", new THREE.Vector3(-87, 18.5, 95), paper_scale, zero_rot);
-
-			// Starbucks coffee
-			loadObject("./obj/starbucks/model.dae", new THREE.Vector3(-35, 15, 210), fuse_scale, zero_rot);
-
-			// water bottle
-			loadObject("./obj/bottle/model.dae", new THREE.Vector3(-96, 13, 15), paper_scale, zero_rot);
-
-			// headphones
-			loadObject("./obj/headphones/model.dae", new THREE.Vector3(-125, 15, 0), fuse_scale, zero_rot);
-
-			// phone
-			let phone_scale = new THREE.Vector3(0.025, 0.025, 0.025);
-			loadObject("./obj/phone/model.dae", new THREE.Vector3(-45, 20, -200), phone_scale, zero_rot);
+			// let open_book_scale = new THREE.Vector3(0.6, 0.6, 0.6);
+			// loadObject("./obj/open_book/model.dae", new THREE.Vector3(40, 17.5, 150), open_book_scale, new THREE.Vector3(0, 0, -Math.PI / 4));
+			//
+			// // pen and paper
+			// let paper_scale = new THREE.Vector3(0.02, 0.02, 0.02);
+			// loadObject("./obj/pencil_paper/model.dae", new THREE.Vector3(-87, 18.5, 95), paper_scale, zero_rot);
+			//
+			// // Starbucks coffee
+			// loadObject("./obj/starbucks/model.dae", new THREE.Vector3(-35, 15, 210), fuse_scale, zero_rot);
+			//
+			// // water bottle
+			// loadObject("./obj/bottle/model.dae", new THREE.Vector3(-96, 13, 15), paper_scale, zero_rot);
+			//
+			// // headphones
+			// loadObject("./obj/headphones/model.dae", new THREE.Vector3(-125, 15, 0), fuse_scale, zero_rot);
+			//
+			// // phone
+			// let phone_scale = new THREE.Vector3(0.025, 0.025, 0.025);
+			// loadObject("./obj/phone/model.dae", new THREE.Vector3(-45, 20, -200), phone_scale, zero_rot);
 
 			/* -------------------- END --------------------- */
 
@@ -694,15 +694,16 @@
 					}
 				}
 
-				// console.log(currIntersection.point);
+				// key to drawer
 				if (playerInventory.isSelected("key")) {
-					if (currIntersection.point.distanceTo(keyhole) < 20) {
+					if (currIntersection.point.distanceTo(keyhole) < 15) {
 						console.log("drawer unlocked!");
 						playerInventory.removeItem("key");
 						// return;
 					}
 				}
-				if (currIntersection.point.distanceTo(keyhole) < 20) {
+				// fuse to fusebox, or just enterring pin to fusebox
+				if (currIntersection.point.distanceTo(fusebox) < 25) {
 					if (!playerInventory.isSelected("fuse")) {
 						showPinEnter();
 					}
