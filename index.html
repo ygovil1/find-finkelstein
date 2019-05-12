@@ -177,6 +177,7 @@
 		// game logic stuff
 		var playerInventory = Inventory();
 		var fuseBoxUnlocked = false;
+		var fuseActivated = false;
 
 		function posInBounds(pos) {
 			if (pos.x >= -195 && pos.x <= 195) {
@@ -263,7 +264,7 @@
 					case 85: //u
 						togglePinEnter();
 						break;
-					case 16:
+					case 13:
 						if (controls.isLocked) {
 							HIGHLIGHT_STATE = true;
 							controls.unlock();
@@ -425,14 +426,14 @@
 			// // wooden tables and green chairs between red sofas and front bookshelves
 			// loadObject("./obj/wooden_table/model.dae", new THREE.Vector3(55, 0, 150), big_table_scale, table_hor);
 			// 		// for table (55, 0, 150)
-			// let green_chair_scale = new THREE.Vector3(0.75, 0.75, 0.75);
+			let green_chair_scale = new THREE.Vector3(0.75, 0.75, 0.75);
 			// loadObject("./obj/green_chair/model.dae", new THREE.Vector3(27, 0, 120), green_chair_scale, new THREE.Vector3());		// for table (55, 0, 150)
 			// loadObject("./obj/green_chair/model.dae", new THREE.Vector3(-10, 0, 120), green_chair_scale, new THREE.Vector3());
 			// loadObject("./obj/green_chair/model.dae", new THREE.Vector3(47, 0, 150), green_chair_scale, new THREE.Vector3(0, 0, Math.PI));
 			// loadObject("./obj/green_chair/model.dae", new THREE.Vector3(10, 0, 150), green_chair_scale, new THREE.Vector3(0, 0, Math.PI));
 			//
 			// // add table lamps to wooden table in the middle of the bookshelves
-			// let tlamp_scale = new THREE.Vector3(1, 1, 0.7);
+			let tlamp_scale = new THREE.Vector3(1, 1, 0.7);
 			// loadObject("./obj/table_lamp/model.dae", new THREE.Vector3(45, 17, -5), tlamp_scale, table_hor);
 			// loadObject("./obj/table_lamp/model.dae", new THREE.Vector3(25, 17, -5), tlamp_scale, table_hor);
 			// loadObject("./obj/table_lamp/model.dae", new THREE.Vector3(5, 17, -5), tlamp_scale, table_hor);
@@ -660,7 +661,7 @@
 		}
 
 		function onMouseClick(event) {
-			if (currIntersection) {					// this if condition not really necessary
+			if (currIntersection && HIGHLIGHT_STATE) {					// this if condition not really necessary
 				// console.log(currIntersection.point);
 
 				for (var i = 0; i < specialObjects.length; i++) {
@@ -678,6 +679,21 @@
 						console.log("drawer unlocked!");
 						playerInventory.removeItem("key");
 						// return;
+					}
+				}
+				if (currIntersection.point.distanceTo(keyhole) < 20) {
+					if (!playerInventory.isSelected("fuse")) {
+						showPinEnter();
+					}
+					else {
+						if (fuseBoxUnlocked) {
+							console.log("activating fuse");
+							fuseActivated = true;
+							playerInventory.removeItem("fuse");
+						}
+						else {
+							showPinEnter();
+						}
 					}
 				}
 				// for (var i = 0; i < receivingObjects.length; i++) {
