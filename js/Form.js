@@ -44,10 +44,11 @@ var togglePinEnter = function() {
 var checkPin = function() {
     const formData = new FormData(form);
     let pin = formData.get("pin");
-    console.log( "Submitted pin: " + pin)
+    console.log("Submitted pin: " + pin);
 
     if (pin === correctPin) {
         console.log("Correct pin!");
         document.getElementById("correctPinMsg").style.display = "block";
+        fuseBoxUnlocked = true;
     }
 }
