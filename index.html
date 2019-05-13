@@ -406,31 +406,31 @@
 			let zero_rot = new THREE.Vector3(0, 0, 0);
 
 			// left
-			// loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(-50, 0, -36), book_scale, book_rot);
-			// loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(-50, 0, 0), book_scale, zero_rot);
-			// loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(-50, 0, -71), book_scale, book_rot);
-			// loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(-50, 0, -35), book_scale, zero_rot);
-			//
-			// // front
-			// let book_front_rot1 = new THREE.Vector3(0, 0, -Math.PI / 2);
-			// let book_front_rot2 = new THREE.Vector3(0, 0, -3 * Math.PI / 2);
-			// let book_tall = new THREE.Vector3(0.5, 1.65, 1.7);
-			// loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(-43, 0, 50), book_tall, book_front_rot1);
-			// loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(16, 0, 50), book_tall, book_front_rot2);
-			// loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(14, 0, 50), book_tall, book_front_rot1);
-			// loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(73, 0, 50), book_tall, book_front_rot2);
-			//
-			// // back
-			// loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(-43, 0, -80), book_tall, book_front_rot1);
-			// loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(16, 0, -80), book_tall, book_front_rot2);
-			// loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(14, 0, -80), book_tall, book_front_rot1);
-			// loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(73, 0, -80), book_tall, book_front_rot2);
-			//
-			// // right
-			// loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(80, 0, 9), book_scale, book_rot);
-			// loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(80, 0, 45), book_scale, zero_rot);
-			// loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(80, 0, -26), book_scale, book_rot);
-			// loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(80, 0, 10), book_scale, zero_rot);
+			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(-50, 0, -36), book_scale, book_rot);
+			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(-50, 0, 0), book_scale, zero_rot);
+			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(-50, 0, -71), book_scale, book_rot);
+			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(-50, 0, -35), book_scale, zero_rot);
+
+			// front
+			let book_front_rot1 = new THREE.Vector3(0, 0, -Math.PI / 2);
+			let book_front_rot2 = new THREE.Vector3(0, 0, -3 * Math.PI / 2);
+			let book_tall = new THREE.Vector3(0.5, 1.65, 1.7);
+			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(-43, 0, 50), book_tall, book_front_rot1);
+			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(16, 0, 50), book_tall, book_front_rot2);
+			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(14, 0, 50), book_tall, book_front_rot1);
+			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(73, 0, 50), book_tall, book_front_rot2);
+
+			// back
+			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(-43, 0, -80), book_tall, book_front_rot1);
+			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(16, 0, -80), book_tall, book_front_rot2);
+			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(14, 0, -80), book_tall, book_front_rot1);
+			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(73, 0, -80), book_tall, book_front_rot2);
+
+			// right
+			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(80, 0, 9), book_scale, book_rot);
+			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(80, 0, 45), book_scale, zero_rot);
+			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(80, 0, -26), book_scale, book_rot);
+			loadObject("./obj/bookshelf/model.dae", new THREE.Vector3(80, 0, 10), book_scale, zero_rot);
 
 			// add pillars by bookshelves
 			var geometry = new THREE.BoxGeometry(11, 11, 100);
@@ -507,6 +507,7 @@
 			loadObject("./obj/table_lamp/model.dae", new THREE.Vector3(5, 17, -5), tlamp_scale, table_hor);
 			loadObject("./obj/table_lamp/model.dae", new THREE.Vector3(-90, 17, 110), tlamp_scale, table_hor);
 			loadObject("./obj/table_lamp/model.dae", new THREE.Vector3(-115, 17, 110), tlamp_scale, table_hor);
+
 			// delete this lamp, replaced with laptop
 			// loadObject("./obj/table_lamp/model.dae", new THREE.Vector3(-90, 17, -40), tlamp_scale, table_hor);
 			loadObject("./obj/table_lamp/model.dae", new THREE.Vector3(-115, 17, -40), tlamp_scale, table_hor);
