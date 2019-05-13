@@ -59,11 +59,43 @@ var updateInstructions = function(htmlString) {
 }
 
 var showHint = function() {
-    var hintText = "You opened the drawer and found a scrap of paper!<br><br>"
-    hintText += "<img id=\"hint\" src=\"img/scrap_hint.png\">";
+    // var hintText = "You opened the drawer and found a scrap of paper!<br><br>"
+    var hintText = "<img id=\"hint\" src=\"img/scrap_hint.png\">";
     // hintText += "The fuse box seems to be broken... <br>"
     // hintText += "But before you can fixed it, it must be unlocked!"
 
+    blocker.style.display = 'block';
+    updateInstructions(hintText);
+    document.getElementById('instructions').style.display = '';
+    hideForm();
+}
+
+var showFuseActivated = function() {
+    console.log("showFuseActivated called")
+    var hintText = "The fuse box has been fixed! The room's security system is now activated."
+    blocker.style.display = 'block';
+    updateInstructions(hintText);
+    document.getElementById('instructions').style.display = '';
+    hideForm();
+}
+var showFuseStillBroken = function() {
+    console.log("showFuseStillBroken called")
+    var hintText = "Fuse box is still broken! You can't use the sensor yet."
+    blocker.style.display = 'block';
+    updateInstructions(hintText);
+    document.getElementById('instructions').style.display = '';
+    hideForm();
+}
+var showDoorUnlocked = function() {
+    console.log("showDoorUnlocked called")
+    var hintText = "The door has been unlocked! You may now enter."
+    blocker.style.display = 'block';
+    updateInstructions(hintText);
+    document.getElementById('instructions').style.display = '';
+    hideForm();
+}
+var showCongratulations = function() {
+    var hintText = "Congratulations! You have solved the puzzle!<br><br> You have successfully escaped Firestone, and have even found Professor Finkelstein! <br><br> You get an A+ for the Graphics final project."
     blocker.style.display = 'block';
     updateInstructions(hintText);
     document.getElementById('instructions').style.display = '';
