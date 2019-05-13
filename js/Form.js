@@ -126,8 +126,7 @@ var showCheck = function() {
 }
 
 var showPhone = function() {
-    var imgHtml = "<br><br><br><br><br> You have found a check from the Housing Office!<br><br> Are you a senior in the bottom quarter of your class?<br><br><br><br>"
-    imgHtml += "<img id=\"checkImg\" src=\"img/housing_check.png\">";
+    var imgHtml = "<img id=\"phoneImg\" src=\"img/message.png\">";
 
     blocker.style.display = 'block';
     updateInstructions(imgHtml);
