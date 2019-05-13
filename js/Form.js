@@ -76,7 +76,7 @@ var showFuseStillBroken = function() {
 }
 var showDoorUnlocked = function() {
     console.log("showDoorUnlocked called")
-    var hintText = "The door has been unlocked! You may now exit."
+    var hintText = "The door has been unlocked and Prof. Finkelstein is inside!"
     blocker.style.display = 'block';
     updateInstructions(hintText);
     document.getElementById('instructions').style.display = '';
