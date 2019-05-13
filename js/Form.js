@@ -70,6 +70,38 @@ var showHint = function() {
     hideForm();
 }
 
+var showFuseActivated = function() {
+    console.log("showFuseActivated called")
+    var hintText = "The fuse box has been fixed! The room's security system is now activated."
+    blocker.style.display = 'block';
+    updateInstructions(hintText);
+    document.getElementById('instructions').style.display = '';
+    hideForm();
+}
+var showFuseStillBroken = function() {
+    console.log("showFuseStillBroken called")
+    var hintText = "Fuse box is still broken! You can't use the sensor yet."
+    blocker.style.display = 'block';
+    updateInstructions(hintText);
+    document.getElementById('instructions').style.display = '';
+    hideForm();
+}
+var showDoorUnlocked = function() {
+    console.log("showDoorUnlocked called")
+    var hintText = "The door has been unlocked! You may now enter."
+    blocker.style.display = 'block';
+    updateInstructions(hintText);
+    document.getElementById('instructions').style.display = '';
+    hideForm();
+}
+var showCongratulations = function() {
+    var hintText = "Congratulations! You have solved the puzzle!<br><br> You have successfully escaped Firestone, and have even found Professor Finkelstein! <br><br> You get an A+ for the Graphics final project."
+    blocker.style.display = 'block';
+    updateInstructions(hintText);
+    document.getElementById('instructions').style.display = '';
+    hideForm();
+}
+
 var showRRR = function() {
     var imgHtml = "<img id=\"RRR\" src=\"img/rrr_book.png\">"
 
@@ -80,6 +112,22 @@ var showRRR = function() {
 }
 
 var hideRRR = function() {
+    blocker.style.display = 'none';
+    document.getElementById('instructions').style.display = 'none';
+    hideForm();
+}
+
+var showCheck = function() {
+    var imgHtml = "<br><br><br><br><br> You have found a check from the Housing Office!<br><br> Are you a senior at the bottom quarter of your class?<br><br><br><br>"
+    imgHtml += "<img id=\"check\" src=\"img/housing_check.png\">";
+
+    blocker.style.display = 'block';
+    updateInstructions(imgHtml);
+    document.getElementById('instructions').style.display = 'block';
+    hideForm();
+}
+
+var hideCheck = function() {
     blocker.style.display = 'none';
     document.getElementById('instructions').style.display = 'none';
     hideForm();

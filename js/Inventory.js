@@ -26,7 +26,7 @@ Inventory = function(){
 				self.refreshRender();
 				return;
 			}
-		}    
+		}
     }
 
     self.hasItem = function(id){
@@ -34,14 +34,14 @@ Inventory = function(){
 			if(self.items[i].id === id){
 				return true;
 			}
-		}  
+		}
 		return false;
     }
 
     self.toggleItem = function(id) {
-        if (self.hasItem(id)) 
+        if (self.hasItem(id))
             self.removeItem(id)
-        else 
+        else
             self.addItem(id)
     }
 
@@ -84,7 +84,7 @@ Inventory = function(){
 
     // toggles whether an item is selected
     self.toggleSelect = function(id) {
-        if (self.isSelected(id)) 
+        if (self.isSelected(id))
             self.unselect()
         else
             self.select(id)
@@ -105,17 +105,21 @@ Inventory = function(){
 		}
 
         document.getElementById("inventory").innerHTML = str;
-        
+
         let selected = self.getSelected();
         // console.log(selected)
-        if (selected !== undefined) { 
+        if (selected !== undefined) {
             document.getElementById(selected).style.backgroundColor = "#888888";
         }
         if (selected === "book")
             showRRR();
         else
             hideRRR();
-            
+        if (selected === "check")
+            showCheck();
+        else
+            hideCheck(); 
+
 	}
 
 
@@ -128,7 +132,7 @@ Item = function(id, name, img, event){
 		id:id,
 		name:name,
         event:event,
-        img:img, 
+        img:img,
         selected:false
 	}
 	Item.List[self.id] = self;
@@ -154,4 +158,8 @@ Item('prox', "Keycard", "img/prox1.png", function(){
 Item('book', "Book", "img/book.png", function(){
     console.log("book clicked");
     playerInventory.toggleSelect('book');
+});
+Item('check', "Check", "img/check.png", function(){
+    console.log("check clicked");
+    playerInventory.toggleSelect('check');
 });
