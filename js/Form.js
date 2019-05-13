@@ -89,6 +89,13 @@ var showCongratulations = function() {
     document.getElementById('instructions').style.display = '';
     hideForm();
 }
+var showElevatorButton = function() {
+    var hintText = "The elevator seems to be broken... You can't use it."
+    blocker.style.display = 'block';
+    updateInstructions(hintText);
+    document.getElementById('instructions').style.display = '';
+    hideForm();
+}
 
 var showHint = function() {
     var hintText = "<img id=\"hint\" src=\"img/scrap_hint1.png\">";
@@ -109,6 +116,16 @@ var showRRR = function() {
 }
 
 var showCheck = function() {
+    var imgHtml = "<br><br><br><br><br> You have found a check from the Housing Office!<br><br> Are you a senior in the bottom quarter of your class?<br><br><br><br>"
+    imgHtml += "<img id=\"checkImg\" src=\"img/housing_check.png\">";
+
+    blocker.style.display = 'block';
+    updateInstructions(imgHtml);
+    document.getElementById('instructions').style.display = 'block';
+    hideForm();
+}
+
+var showPhone = function() {
     var imgHtml = "<br><br><br><br><br> You have found a check from the Housing Office!<br><br> Are you a senior in the bottom quarter of your class?<br><br><br><br>"
     imgHtml += "<img id=\"checkImg\" src=\"img/housing_check.png\">";
 

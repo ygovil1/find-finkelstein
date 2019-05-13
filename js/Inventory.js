@@ -117,8 +117,10 @@ Inventory = function(){
             showCheck();
         else if (selected === "scrap")
             showHint();
+        else if (selected === "phone")
+            showPhone(); 
         else
-            hideInstructions(); 
+            hideInstructions();
 
 	}
 
@@ -163,7 +165,10 @@ Item('check', "Check", "img/check.png", function(){
     console.log("check clicked");
     playerInventory.toggleSelect('check');
 });
-
+Item('phone', "Phone", "img/phone.png", function(){
+    console.log("phone clicked");
+    playerInventory.toggleSelect('phone');
+});
 Item('scrap', "Scrap", "img/scrap2.png", function(){
     console.log("scrap clicked");
     playerInventory.toggleSelect('scrap');
