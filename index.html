@@ -126,7 +126,7 @@
 
 		#hint {
 			display: box;
-			height: 80%;
+			height: 100%;
 			top: 50%;
 		}
 	</style>
@@ -749,6 +749,7 @@
 					if (currIntersection.point.distanceTo(specialObjects[i].position) < 15) {
 						specialObjects[i].visible = false;
 						playerInventory.addItem(specialObjects[i].name);
+						playerInventory.select(specialObjects[i].name);
 						return;
 					}
 				}
@@ -758,6 +759,8 @@
 					if (currIntersection.point.distanceTo(keyhole) < 15) {
 						// console.log("drawer unlocked!");
 						playerInventory.removeItem("key");
+						playerInventory.addItem("scrap");
+						playerInventory.select("scrap");
 						showHint();
 						return;
 					}
