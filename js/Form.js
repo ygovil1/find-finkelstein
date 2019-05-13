@@ -58,18 +58,6 @@ var updateInstructions = function(htmlString) {
     document.getElementById("instructions").innerHTML = htmlString;
 }
 
-var showHint = function() {
-    // var hintText = "You opened the drawer and found a scrap of paper!<br><br>"
-    var hintText = "<img id=\"hint\" src=\"img/scrap_hint.png\">";
-    // hintText += "The fuse box seems to be broken... <br>"
-    // hintText += "But before you can fixed it, it must be unlocked!"
-
-    blocker.style.display = 'block';
-    updateInstructions(hintText);
-    document.getElementById('instructions').style.display = '';
-    hideForm();
-}
-
 var showFuseActivated = function() {
     console.log("showFuseActivated called")
     var hintText = "The fuse box has been fixed! The room's security system is now activated."
@@ -95,10 +83,26 @@ var showDoorUnlocked = function() {
     hideForm();
 }
 var showCongratulations = function() {
-    var hintText = "Congratulations! You have solved the puzzle!<br><br> You successfully escaped Firestone and found Professor Finkelstein! <br><br> You get an A+ for the Graphics final project."
+    var hintText = "Congratulations! You have solved the puzzle!<br><br> You successfully escaped Firestone and found Professor Finkelstein. <br><br> He gave you an A+ on the Graphics final project!"
     blocker.style.display = 'block';
     updateInstructions(hintText);
     document.getElementById('instructions').style.display = '';
+    hideForm();
+}
+var showElevatorButton = function() {
+    var hintText = "The elevator seems to be broken... You can't use it."
+    blocker.style.display = 'block';
+    updateInstructions(hintText);
+    document.getElementById('instructions').style.display = '';
+    hideForm();
+}
+
+var showHint = function() {
+    var hintText = "<img id=\"hint\" src=\"img/scrap_hint1.png\">";
+
+    blocker.style.display = 'block';
+    updateInstructions(hintText);
+    document.getElementById('instructions').style.display = 'block';
     hideForm();
 }
 
@@ -114,6 +118,15 @@ var showRRR = function() {
 var showCheck = function() {
     var imgHtml = "<br><br><br><br><br> You have found a check from the Housing Office!<br><br> Are you a senior in the bottom quarter of the upperclass draw?<br><br><br><br>"
     imgHtml += "<img id=\"checkImg\" src=\"img/housing_check.png\">";
+
+    blocker.style.display = 'block';
+    updateInstructions(imgHtml);
+    document.getElementById('instructions').style.display = 'block';
+    hideForm();
+}
+
+var showPhone = function() {
+    var imgHtml = "<img id=\"phoneImg\" src=\"img/message.png\">";
 
     blocker.style.display = 'block';
     updateInstructions(imgHtml);
