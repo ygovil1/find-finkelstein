@@ -11,7 +11,7 @@ Inventory = function(){
 				return;
 			}
 		}
-		self.items.push({id:id});
+        self.items.push({id:id});
 		self.refreshRender();
     }
 
@@ -113,12 +113,12 @@ Inventory = function(){
         }
         if (selected === "book")
             showRRR();
-        else
-            hideRRR();
-        if (selected === "check")
+        else if (selected === "check")
             showCheck();
+        else if (selected === "scrap")
+            showHint();
         else
-            hideCheck(); 
+            hideInstructions(); 
 
 	}
 
@@ -162,4 +162,9 @@ Item('book', "Book", "img/book.png", function(){
 Item('check', "Check", "img/check.png", function(){
     console.log("check clicked");
     playerInventory.toggleSelect('check');
+});
+
+Item('scrap', "Scrap", "img/scrap2.png", function(){
+    console.log("scrap clicked");
+    playerInventory.toggleSelect('scrap');
 });

@@ -58,18 +58,6 @@ var updateInstructions = function(htmlString) {
     document.getElementById("instructions").innerHTML = htmlString;
 }
 
-var showHint = function() {
-    // var hintText = "You opened the drawer and found a scrap of paper!<br><br>"
-    var hintText = "<img id=\"hint\" src=\"img/scrap_hint.png\">";
-    // hintText += "The fuse box seems to be broken... <br>"
-    // hintText += "But before you can fixed it, it must be unlocked!"
-
-    blocker.style.display = 'block';
-    updateInstructions(hintText);
-    document.getElementById('instructions').style.display = '';
-    hideForm();
-}
-
 var showFuseActivated = function() {
     console.log("showFuseActivated called")
     var hintText = "The fuse box has been fixed! The room's security system is now activated."
@@ -88,17 +76,26 @@ var showFuseStillBroken = function() {
 }
 var showDoorUnlocked = function() {
     console.log("showDoorUnlocked called")
-    var hintText = "The door has been unlocked! You may now enter."
+    var hintText = "The door has been unlocked and Prof. Finkelstein is inside!"
     blocker.style.display = 'block';
     updateInstructions(hintText);
     document.getElementById('instructions').style.display = '';
     hideForm();
 }
 var showCongratulations = function() {
-    var hintText = "Congratulations! You have solved the puzzle!<br><br> You have successfully escaped Firestone, and have even found Professor Finkelstein! <br><br> You get an A+ for the Graphics final project."
+    var hintText = "Congratulations! You have solved the puzzle!<br><br> You successfully escaped Firestone and found Professor Finkelstein. <br><br> He gave you an A+ on the Graphics final project!"
     blocker.style.display = 'block';
     updateInstructions(hintText);
     document.getElementById('instructions').style.display = '';
+    hideForm();
+}
+
+var showHint = function() {
+    var hintText = "<img id=\"hint\" src=\"img/scrap_hint1.png\">";
+
+    blocker.style.display = 'block';
+    updateInstructions(hintText);
+    document.getElementById('instructions').style.display = 'block';
     hideForm();
 }
 
@@ -111,15 +108,9 @@ var showRRR = function() {
     hideForm();
 }
 
-var hideRRR = function() {
-    blocker.style.display = 'none';
-    document.getElementById('instructions').style.display = 'none';
-    hideForm();
-}
-
 var showCheck = function() {
-    var imgHtml = "<br><br><br><br><br> You have found a check from the Housing Office!<br><br> Are you a senior at the bottom quarter of your class?<br><br><br><br>"
-    imgHtml += "<img id=\"check\" src=\"img/housing_check.png\">";
+    var imgHtml = "<br><br><br><br><br> You have found a check from the Housing Office!<br><br> Are you a senior in the bottom quarter of your class?<br><br><br><br>"
+    imgHtml += "<img id=\"checkImg\" src=\"img/housing_check.png\">";
 
     blocker.style.display = 'block';
     updateInstructions(imgHtml);
@@ -127,7 +118,24 @@ var showCheck = function() {
     hideForm();
 }
 
-var hideCheck = function() {
+var showInstructions = function() {
+    var instrHtml = "<span style=\"font-size:40px\">Looking for Finkelstein?</span>"
+    instrHtml += "<br /><br>"
+    instrHtml += "Welcome to Firestone!<br><br>"
+    instrHtml += "You need to submit your 426 Dean's Date assignment but you can't find your Graphics professor! Gather clues to find him. <br><br>"
+    instrHtml += "Special objects you collect will appear in your inventory at the bottom of the screen. You may select them to use them on other objects in the scene, as appropriate.<br><br>"
+    instrHtml += "Move forward and backward with Up and Down keys. Rotate views with your mouse.<br><br>"
+    instrHtml += "Press Enter to toggle between walking mode and cursor mode. <br><br>"
+    instrHtml += "Press H to view these instructions again. <br> <br>"
+    instrHtml += "Click anywhere to continue."
+
+    blocker.style.display = 'block';
+    updateInstructions(instrHtml);
+    document.getElementById('instructions').style.display = '';
+    hideForm();
+}
+
+var hideInstructions = function() {
     blocker.style.display = 'none';
     document.getElementById('instructions').style.display = 'none';
     hideForm();

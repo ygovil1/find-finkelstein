@@ -126,8 +126,8 @@
 
 		#hint {
 			display: box;
-			height: 80%;
-			top:50%;
+			height: 100%;
+			top: 50%;
 		}
 	</style>
 </head>
@@ -162,9 +162,11 @@
 			Welcome to Firestone!<br><br>
 			You need to submit your 426 Dean's Date assignment but you can't find your Graphics professor! Gather clues
 			to find him. <br><br>
-			Special objects you collect will appear in your inventory at the bottom of the screen. You may select them to apply to other objects in the scene, as appropriate.<br><br>
+			Special objects you collect will appear in your inventory at the bottom of the screen. You may select them
+			to use them on other objects in the scene, as appropriate.<br><br>
 			Move forward and backward with Up and Down keys. Rotate views with your mouse.<br><br>
 			Press Enter to toggle between walking mode and cursor mode. <br><br>
+			Press H to view these instructions again. <br> <br>
 			Click anywhere to begin.
 		</div>
 
@@ -204,7 +206,7 @@
 		var projector = new THREE.Projector();
 
 		var keyhole = new THREE.Vector3(180, 43, 150);
-		var fusebox = new THREE.Vector3(195, 40, -65);
+		var fusebox = new THREE.Vector3(195, 40, -95);
 		var sensor = new THREE.Vector3(-110, 20, -245);
 		var closed_door, open_door;
 		var blocker = document.getElementById('blocker');
@@ -261,10 +263,15 @@
 				controls.lock();
 			}, false);
 
+			document.getElementById('correctPinMsg').addEventListener('click', function () {
+				controls.lock();
+			}, false);
+
 
 			controls.addEventListener('lock', function () {        // ?????
-				instructions.style.display = 'none';
-				blocker.style.display = 'none';
+				hideInstructions();
+				HIGHLIGHT_STATE = false;
+				playerInventory.unselect();
 			});
 
 			controls.addEventListener('unlock', function () {      // ?????
@@ -311,6 +318,10 @@
 						break;
 					case 85: //u
 						togglePinEnter();
+						break;
+					case 72:
+						showInstructions();
+						controls.unlock();
 						break;
 					case 13:
 						if (controls.isLocked) {
@@ -464,7 +475,7 @@
 			loadObject("./obj/fusebox/model.dae", new THREE.Vector3(235, 20, -100), fuse_box_scale, new THREE.Vector3(0, 0, 3 * Math.PI / 2), false, "fusebox", true);
 			// add window
 			let window_scale = new THREE.Vector3(1.2, 1.2, 1.2);
-			loadObject("./obj/window/model.dae", new THREE.Vector3(225, 30, -80), window_scale, new THREE.Vector3(0,0,Math.PI /2));
+			loadObject("./obj/window/model.dae", new THREE.Vector3(225, 30, -80), window_scale, new THREE.Vector3(0, 0, Math.PI / 2));
 
 			// add red point light inside sensor (to indicate LOCKED state)
 			proxLight = new THREE.PointLight(0xff0000, 1, 11);
@@ -519,7 +530,7 @@
 
 			// add elevator
 			let elevator_scale = new THREE.Vector3(0.7, 0.7, 0.7);
-			loadObject("./obj/elevator/model.dae", new THREE.Vector3(-185, 0, 190), elevator_scale, new THREE.Vector3(0,0,Math.PI /2));
+			loadObject("./obj/elevator/model.dae", new THREE.Vector3(-185, 0, 190), elevator_scale, new THREE.Vector3(0, 0, Math.PI / 2));
 
 			// add white high-back sofa
 			let sofa_scale = new THREE.Vector3(0.6, 0.6, 0.8);
@@ -611,14 +622,14 @@
 			let fuse_scale = new THREE.Vector3(0.8, 0.8, 0.8);
 			loadObject("./obj/fuse/model.dae", new THREE.Vector3(55, 20, -190), fuse_scale, new THREE.Vector3(0, Math.PI / 2, 0), true, "fuse");
 			// checkbook
-			loadObject("./obj/checkbook/model.dae", new THREE.Vector3(-100, 12, -75), new THREE.Vector3(0.5,0.5,0.5), new THREE.Vector3(0,0,0.5), true, "check", false);
+			loadObject("./obj/checkbook/model.dae", new THREE.Vector3(-115, 19, -65), new THREE.Vector3(0.5, 0.5, 0.5), new THREE.Vector3(0, 0, 0.5), true, "check", false);
 			/* -------------------- END --------------------- */
 
 			// add misc objects to find
 			/* -------------------- START ------------------- */
 			// open book
 			let open_book_scale = new THREE.Vector3(0.6, 0.6, 0.6);
-			loadObject("./obj/open_book/model.dae", new THREE.Vector3(40, 17.5, 150), open_book_scale, new THREE.Vector3(-0.3,0,0));
+			loadObject("./obj/open_book/model.dae", new THREE.Vector3(40, 17.5, 150), open_book_scale, new THREE.Vector3(-0.3, 0, 0));
 			// pen and paper
 			let paper_scale = new THREE.Vector3(0.02, 0.02, 0.02);
 			loadObject("./obj/pencil_paper/model.dae", new THREE.Vector3(-87, 18.5, 95), paper_scale, zero_rot);
@@ -632,7 +643,7 @@
 			let phone_scale = new THREE.Vector3(0.025, 0.025, 0.025);
 			loadObject("./obj/phone/model.dae", new THREE.Vector3(-45, 20, -200), phone_scale, zero_rot);
 			// macbook
-			let mac_scale = new THREE.Vector3(1,1,1);
+			let mac_scale = new THREE.Vector3(1, 1, 1);
 			loadObject("./obj/macbook/model.dae", new THREE.Vector3(-95, 18.5, 15), mac_scale, zero_rot);
 			// books stack
 			loadObject("./obj/book_stack/model.dae", new THREE.Vector3(70, 20, -155), mac_scale, zero_rot);
@@ -658,7 +669,7 @@
 			var wallMaterial = new THREE.MeshStandardMaterial({ color: 0xfffaef, side: THREE.DoubleSide });
 			var back_wall = new THREE.Mesh(southWallGeometry, wallMaterial);
 			scene.add(back_wall);
-			var doorWallMaterial = new THREE.MeshStandardMaterial({ color: 0x000000, side: THREE.DoubleSide});
+			var doorWallMaterial = new THREE.MeshStandardMaterial({ color: 0x000000, side: THREE.DoubleSide });
 			var door_wall = new THREE.Mesh(doorWall, doorWallMaterial);
 			scene.add(door_wall);
 
@@ -738,6 +749,7 @@
 					if (currIntersection.point.distanceTo(specialObjects[i].position) < 15) {
 						specialObjects[i].visible = false;
 						playerInventory.addItem(specialObjects[i].name);
+						playerInventory.select(specialObjects[i].name);
 						return;
 					}
 				}
@@ -747,6 +759,8 @@
 					if (currIntersection.point.distanceTo(keyhole) < 15) {
 						// console.log("drawer unlocked!");
 						playerInventory.removeItem("key");
+						playerInventory.addItem("scrap");
+						playerInventory.select("scrap");
 						showHint();
 						return;
 					}
