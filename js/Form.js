@@ -80,7 +80,7 @@ var showFuseActivated = function() {
 }
 var showFuseStillBroken = function() {
     console.log("showFuseStillBroken called")
-    var hintText = "Fuse box is still broken! You can't use the sensor yet."
+    var hintText = "Fuse box is broken! You can't use the sensor yet."
     blocker.style.display = 'block';
     updateInstructions(hintText);
     document.getElementById('instructions').style.display = '';
@@ -112,7 +112,7 @@ var showRRR = function() {
 }
 
 var showCheck = function() {
-    var imgHtml = "<br><br><br><br><br> You have found a check from the Housing Office!<br><br> Are you a senior in the bottom quarter of your class?<br><br><br><br>"
+    var imgHtml = "<br><br><br><br><br> You have found a check from the Housing Office!<br><br> Are you a senior in the bottom quarter of the upperclass draw?<br><br><br><br>"
     imgHtml += "<img id=\"checkImg\" src=\"img/housing_check.png\">";
 
     blocker.style.display = 'block';
