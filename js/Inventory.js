@@ -113,12 +113,10 @@ Inventory = function(){
         }
         if (selected === "book")
             showRRR();
-        else
-            hideRRR();
-        if (selected === "check")
+        else if (selected === "check")
             showCheck();
         else
-            hideCheck(); 
+            hideInstructions(); 
 
 	}
 
@@ -161,5 +159,6 @@ Item('book', "Book", "img/book.png", function(){
 });
 Item('check', "Check", "img/check.png", function(){
     console.log("check clicked");
+    console.log(playerInventory.isSelected('check'));
     playerInventory.toggleSelect('check');
 });
