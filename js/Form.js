@@ -83,7 +83,7 @@ var showDoorUnlocked = function() {
     hideForm();
 }
 var showCongratulations = function() {
-    var hintText = "Congratulations! You have solved the puzzle!<br><br> You successfully escaped Firestone and found Professor Finkelstein. <br><br> He gave you an A+ on the Graphics final project!"
+    var hintText = "Congratulations! You have solved the puzzle!<br><br> You successfully escaped Firestone and found Prof. Finkelstein. <br><br> He gave you an A+ on the Graphics final project!"
     blocker.style.display = 'block';
     updateInstructions(hintText);
     document.getElementById('instructions').style.display = '';
@@ -135,7 +135,7 @@ var showPhone = function() {
 }
 
 var showInstructions = function() {
-    var instrHtml = "<span style=\"font-size:40px\">Looking for Finkelstein?</span>"
+    var instrHtml = "<span style=\"font-size:40px\">Looking for Prof. Finkelstein?</span>"
     instrHtml += "<br /><br>"
     instrHtml += "Welcome to Firestone!<br><br>"
     instrHtml += "You need to submit your 426 Dean's Date assignment but you can't find your Graphics professor! Gather clues to find him. <br><br>"
