@@ -129,6 +129,12 @@
 			height: 100%;
 			top: 50%;
 		}
+
+		#phoneImg {
+			display: : box;
+			height: 100%;
+			top: 50%;
+		}
 	</style>
 </head>
 
@@ -162,10 +168,12 @@
 			Welcome to Firestone!<br><br>
 			You need to submit your 426 Dean's Date assignment but you can't find your Graphics professor! Gather clues
 			to find him. <br><br>
-			Special objects you collect will appear in your inventory at the bottom of the screen. You may select them
-			to use them on other objects in the scene, as appropriate.<br><br>
-			Move forward and backward with Up and Down keys. Rotate views with your mouse.<br><br>
-			Press Enter to toggle between walking mode and cursor mode. <br><br>
+			Special objects you collect will appear in your inventory at the bottom of the screen. Click on objects in
+			the inventory to select them. <br>
+			You need to select them to use them on other objects in the scene, as appropriate.<br><br>
+			Move around with the arrow keys. Move your mouse to look around.<br>
+			Press Enter to toggle between walking mode and cursor mode. You need to be in cursor mode to interact with
+			objects. <br>
 			Press H to view these instructions again. <br> <br>
 			Click anywhere to begin.
 		</div>
@@ -312,7 +320,7 @@
 						playerInventory.toggleItem('fuse');
 						break;
 					case 80: // p
-						playerInventory.toggleItem('prox');
+						playerInventory.toggleItem('phone');
 						break;
 					case 66: // b
 						playerInventory.toggleItem('book');
