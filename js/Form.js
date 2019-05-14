@@ -60,7 +60,7 @@ var updateInstructions = function(htmlString) {
 
 var showFuseActivated = function() {
     console.log("showFuseActivated called")
-    var hintText = "The fuse box has been fixed! The room's security system is now activated."
+    var hintText = "The fusebox has been fixed! The room's security system is now activated and the door can now be unlocked with a keycard."
     blocker.style.display = 'block';
     updateInstructions(hintText);
     document.getElementById('instructions').style.display = '';
@@ -68,7 +68,7 @@ var showFuseActivated = function() {
 }
 var showFuseStillBroken = function() {
     console.log("showFuseStillBroken called")
-    var hintText = "Fuse box is broken! You can't use the sensor yet."
+    var hintText = "Fusebox is broken! You can't use the sensor yet."
     blocker.style.display = 'block';
     updateInstructions(hintText);
     document.getElementById('instructions').style.display = '';
