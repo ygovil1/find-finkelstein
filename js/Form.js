@@ -139,9 +139,10 @@ var showInstructions = function() {
     instrHtml += "<br /><br>"
     instrHtml += "Welcome to Firestone!<br><br>"
     instrHtml += "You need to submit your 426 Dean's Date assignment but you can't find your Graphics professor! Gather clues to find him. <br><br>"
-    instrHtml += "Special objects you collect will appear in your inventory at the bottom of the screen. You may select them to use them on other objects in the scene, as appropriate.<br><br>"
-    instrHtml += "Move forward and backward with Up and Down keys. Rotate views with your mouse.<br><br>"
-    instrHtml += "Press Enter to toggle between walking mode and cursor mode. <br><br>"
+    instrHtml += "Special objects you collect will appear in your inventory at the bottom of the screen. Click on objects in the inventory to select them.<br> " 
+    instrHtml += "You need to select them to use them to use them on other objects in the scene, as appropriate.<br><br>"
+    instrHtml += "Move around with the arrow keys. Move your mouse to look around.<br>"
+    instrHtml += "Press Enter to toggle between walking mode and cursor mode. You need to be in cursor mode to interact with objects.<br>"
     instrHtml += "Press H to view these instructions again. <br> <br>"
     instrHtml += "Click anywhere to continue."
 

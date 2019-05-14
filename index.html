@@ -129,6 +129,12 @@
 			height: 100%;
 			top: 50%;
 		}
+
+		#phoneImg {
+			display: : box;
+			height: 100%;
+			top: 50%;
+		}
 	</style>
 </head>
 
@@ -162,10 +168,12 @@
 			Welcome to Firestone!<br><br>
 			You need to submit your 426 Dean's Date assignment but you can't find your Graphics professor! Gather clues
 			to find him. <br><br>
-			Special objects you collect will appear in your inventory at the bottom of the screen. You may select them
-			to use them on other objects in the scene, as appropriate.<br><br>
-			Move forward and backward with Up and Down keys. Rotate views with your mouse.<br><br>
-			Press Enter to toggle between walking mode and cursor mode. <br><br>
+			Special objects you collect will appear in your inventory at the bottom of the screen. Click on objects in
+			the inventory to select them. <br>
+			You need to select them to use them on other objects in the scene, as appropriate.<br><br>
+			Move around with the arrow keys. Move your mouse to look around.<br>
+			Press Enter to toggle between walking mode and cursor mode. You need to be in cursor mode to interact with
+			objects. <br>
 			Press H to view these instructions again. <br> <br>
 			Click anywhere to begin.
 		</div>
@@ -312,7 +320,7 @@
 						playerInventory.toggleItem('fuse');
 						break;
 					case 80: // p
-						playerInventory.toggleItem('prox');
+						playerInventory.toggleItem('phone');
 						break;
 					case 66: // b
 						playerInventory.toggleItem('book');
@@ -531,7 +539,7 @@
 
 			// add elevator
 			let elevator_scale = new THREE.Vector3(0.7, 0.7, 0.7);
-			loadObject("./obj/elevator/model.dae", new THREE.Vector3(-185, 0, 190), elevator_scale, new THREE.Vector3(0, 0, Math.PI / 2));
+			// loadObject("./obj/elevator/model.dae", new THREE.Vector3(-185, 0, 190), elevator_scale, new THREE.Vector3(0, 0, Math.PI / 2));
 			// let fuse_scale = new THREE.Vector3(0.8, 0.8, 0.8);
 			// loadObject("./obj/fuse/model.dae", new THREE.Vector3(-195, 35, 110), fuse_scale, new THREE.Vector3(0, Math.PI / 2, 0), false);
 
@@ -566,14 +574,14 @@
 
 			// add red sofas and coffe tables on the right when first walk in, as well as drawer
 			let red_chair_scale = new THREE.Vector3(1, 1, 1);
-			// loadObject("./obj/red_chair/model.dae", new THREE.Vector3(-50, 0, 240), red_chair_scale, new THREE.Vector3(0, 0, 1.65));	// for coffee table (-50, 0, 225)
-			// loadObject("./obj/red_chair/model.dae", new THREE.Vector3(30, 0, 230), red_chair_scale, new THREE.Vector3(0, 0, -3.9));
-			// loadObject("./obj/red_chair/model.dae", new THREE.Vector3(75, 0, 240), red_chair_scale, new THREE.Vector3(0, 0, 1.65));	// for coffee table (45, 0, 225)
-			// loadObject("./obj/red_chair/model.dae", new THREE.Vector3(155, 0, 230), red_chair_scale, new THREE.Vector3(0, 0, -3.9));
-			// let coffee_table_scale = new THREE.Vector3(1, 1, 1);
-			// loadObject("./obj/coffee_table/model.dae", new THREE.Vector3(-50, 0, 225), coffee_table_scale, zero_rot);
-			// loadObject("./obj/coffee_table/model.dae", new THREE.Vector3(75, 0, 225), coffee_table_scale, zero_rot);
-			// loadObject("./obj/drawer/model.dae", new THREE.Vector3(70, 0, 70), coffee_table_scale, new THREE.Vector3(0, 0, 3 * Math.PI / 2), false, "drawer", true);
+			loadObject("./obj/red_chair/model.dae", new THREE.Vector3(-50, 0, 240), red_chair_scale, new THREE.Vector3(0, 0, 1.65));	// for coffee table (-50, 0, 225)
+			loadObject("./obj/red_chair/model.dae", new THREE.Vector3(30, 0, 230), red_chair_scale, new THREE.Vector3(0, 0, -3.9));
+			loadObject("./obj/red_chair/model.dae", new THREE.Vector3(75, 0, 240), red_chair_scale, new THREE.Vector3(0, 0, 1.65));	// for coffee table (45, 0, 225)
+			loadObject("./obj/red_chair/model.dae", new THREE.Vector3(155, 0, 230), red_chair_scale, new THREE.Vector3(0, 0, -3.9));
+			let coffee_table_scale = new THREE.Vector3(1, 1, 1);
+			loadObject("./obj/coffee_table/model.dae", new THREE.Vector3(-50, 0, 225), coffee_table_scale, zero_rot);
+			loadObject("./obj/coffee_table/model.dae", new THREE.Vector3(75, 0, 225), coffee_table_scale, zero_rot);
+			loadObject("./obj/drawer/model.dae", new THREE.Vector3(70, 0, 70), coffee_table_scale, new THREE.Vector3(0, 0, 3 * Math.PI / 2), false, "drawer", true);
 			//
 			// // add round tables in the back, next to "secret" door
 			// let round_table_scale = new THREE.Vector3(0.2, 0.2, 0.2);
@@ -617,10 +625,10 @@
 			loadObject("./obj/book/model.dae", new THREE.Vector3(41, 18, -18), bscale, zero_rot, true, "book");
 			// prox / id card
 			let prox_scale = new THREE.Vector3(1.2, 1.2, 1.2);
-			loadObject("./obj/id_card/model.dae", new THREE.Vector3(62, 14, 225), prox_scale, zero_rot, true, "prox");
+			loadObject("./obj/id_card/model.dae", new THREE.Vector3(100, 15, 200), prox_scale, new THREE.Vector3(0,0,0.7), true, "prox");
 			// key
 			let key_scale = new THREE.Vector3(0.05, 0.05, 0.05);
-			loadObject("./obj/key/model.dae", new THREE.Vector3(-138, 0, 30), key_scale, new THREE.Vector3(0, 0.6, 0), true, "key");
+			loadObject("./obj/key/model.dae", new THREE.Vector3(-115, 12, 35), key_scale, new THREE.Vector3(0, Math.PI/2, 0), true, "key");
 			// fuse
 			let fuse_scale = new THREE.Vector3(0.8, 0.8, 0.8);
 			loadObject("./obj/fuse/model.dae", new THREE.Vector3(55, 20, -190), fuse_scale, new THREE.Vector3(0, Math.PI / 2, 0), true, "fuse");
