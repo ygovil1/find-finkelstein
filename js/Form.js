@@ -60,7 +60,7 @@ var updateInstructions = function(htmlString) {
 
 var showFuseActivated = function() {
     console.log("showFuseActivated called")
-    var hintText = "The fuse box has been fixed! The room's security system is now activated."
+    var hintText = "The fusebox has been fixed! The room's security system is now activated and the door can now be unlocked with a keycard."
     blocker.style.display = 'block';
     updateInstructions(hintText);
     document.getElementById('instructions').style.display = '';
@@ -68,7 +68,7 @@ var showFuseActivated = function() {
 }
 var showFuseStillBroken = function() {
     console.log("showFuseStillBroken called")
-    var hintText = "Fuse box is still broken! You can't use the sensor yet."
+    var hintText = "Fusebox is broken! You can't use the sensor yet."
     blocker.style.display = 'block';
     updateInstructions(hintText);
     document.getElementById('instructions').style.display = '';
@@ -83,7 +83,7 @@ var showDoorUnlocked = function() {
     hideForm();
 }
 var showCongratulations = function() {
-    var hintText = "Congratulations! You have solved the puzzle!<br><br> You successfully escaped Firestone and found Professor Finkelstein. <br><br> He gave you an A+ on the Graphics final project!"
+    var hintText = "Congratulations! You have solved the puzzle!<br><br> You successfully escaped Firestone and found Prof. Finkelstein. <br><br> He gave you an A+ on the Graphics final project!"
     blocker.style.display = 'block';
     updateInstructions(hintText);
     document.getElementById('instructions').style.display = '';
@@ -116,7 +116,7 @@ var showRRR = function() {
 }
 
 var showCheck = function() {
-    var imgHtml = "<br><br><br><br><br> You have found a check from the Housing Office!<br><br> Are you a senior in the bottom quarter of your class?<br><br><br><br>"
+    var imgHtml = "<br><br><br><br><br> You have found a check from the Housing Office!<br><br> Are you a senior in the bottom quarter of the upperclass draw?<br><br><br><br>"
     imgHtml += "<img id=\"checkImg\" src=\"img/housing_check.png\">";
 
     blocker.style.display = 'block';
@@ -135,7 +135,7 @@ var showPhone = function() {
 }
 
 var showInstructions = function() {
-    var instrHtml = "<span style=\"font-size:40px\">Looking for Finkelstein?</span>"
+    var instrHtml = "<span style=\"font-size:40px\">Looking for Prof. Finkelstein?</span>"
     instrHtml += "<br /><br>"
     instrHtml += "Welcome to Firestone!<br><br>"
     instrHtml += "You need to submit your 426 Dean's Date assignment but you can't find your Graphics professor! Gather clues to find him. <br><br>"
