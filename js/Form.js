@@ -2,6 +2,10 @@ var form = document.querySelector('form');
 var form_showing = false;
 var correctPin = "957";
 
+var wrapStatic = function (str) {
+    return "{% static " + str + "%}"
+}
+
 
 // Show/hide/toggle form div itself
 var showForm = function() {
