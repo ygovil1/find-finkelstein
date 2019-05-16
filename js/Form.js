@@ -139,7 +139,7 @@ var showPhone = function() {
 }
 
 var showInstructions = function() {
-    var instrHtml = "<span style=\"font-size:40px\">Looking for Prof. Finkelstein?</span>"
+    var instrHtml = "<span style=\"font-size:40px\">Looking for Professor Finkelstein?</span>"
     instrHtml += "<br /><br>"
     instrHtml += "Welcome to Firestone!<br><br>"
     instrHtml += "You need to submit your 426 Dean's Date assignment but you can't find your Graphics professor! Gather clues to find him. <br><br>"
