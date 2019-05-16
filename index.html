@@ -144,8 +144,6 @@
 	<script src="js/PointerLockControls.js"></script>
 	<script src="js/OBJLoader.js"></script>
 	<script src="js/ColladaLoader.js"></script>
-	<script src="js/Inventory.js"></script>
-	<script src="js/Form.js"></script>
 
 	<div id="blocker">
 
@@ -183,6 +181,9 @@
 	</div>
 
 	<div id="inventory"></div>
+
+	<script src="js/Form.js"></script>
+	<script src="js/Inventory.js"></script>
 
 	<script>
 		var camera, scene, renderer, controls;
@@ -539,8 +540,6 @@
 			// add elevator
 			let elevator_scale = new THREE.Vector3(0.7, 0.7, 0.7);
 			loadObject("./obj/elevator/model.dae", new THREE.Vector3(-185, 0, 190), elevator_scale, new THREE.Vector3(0, 0, Math.PI / 2));
-			let fuse_scale = new THREE.Vector3(0.8, 0.8, 0.8);
-			loadObject("./obj/fuse/model.dae", new THREE.Vector3(-195, 35, 110), fuse_scale, new THREE.Vector3(0, Math.PI / 2, 0), false);
 
 			// add white high-back sofa
 			let sofa_scale = new THREE.Vector3(0.6, 0.6, 0.8);
@@ -629,7 +628,7 @@
 			let key_scale = new THREE.Vector3(0.05, 0.05, 0.05);
 			loadObject("./obj/key/model.dae", new THREE.Vector3(-115, 12, 35), key_scale, new THREE.Vector3(0, Math.PI / 2, 0), true, "key");
 			// fuse
-			// let fuse_scale = new THREE.Vector3(0.8, 0.8, 0.8);
+			let fuse_scale = new THREE.Vector3(0.8, 0.8, 0.8);
 			loadObject("./obj/fuse/model.dae", new THREE.Vector3(55, 20, -190), fuse_scale, new THREE.Vector3(0, Math.PI / 2, 0), true, "fuse");
 			// checkbook
 			loadObject("./obj/checkbook/model.dae", new THREE.Vector3(-115, 19, -65), new THREE.Vector3(0.5, 0.5, 0.5), new THREE.Vector3(0, 0, 0.5), true, "check", false);
